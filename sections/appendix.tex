@@ -1,0 +1,355 @@
+\section{Programming Language Definitions}
+\label{chr:appendix-programming-language-definitions}
+
+% The languages used in Chapters~\ref{chr:Modeling} and~\ref{chr:RevealingInconsistencies}
+% are defined in this appendix
+% using operational semantics.
+The programming languages used throughout the paper
+mostly follows
+the presentation in
+the book
+Types and Programming Languages by~\citet{pierceTypesProgrammingLanguages2002}
+with minor changes.
+In particular,
+italics are used for metavariables and
+the axioms
+in the reduction (evaluation) rules and
+typing rules
+are shown with explicitly empty premises.
+
+
+\subsection{UntypedLambda}
+\label{sec:language-definition-untypedlambda}
+
+Figure~\ref{fig:language-definition-untypedlambda}
+shows the syntax and evaluation rules
+for the untyped lambda calculus by~\citet{churchUnsolvableProblemElementary1936a,churchCalculiLambdaconversion1941},
+that we have referred to as \plName{UntypedLambda}.
+%
+This language is used in
+Sections~\ref{sec:ExpTree},
+\ref{sec:ExpTutor},
+%\ref{sec:Reduct},
+and~\ref{sec:AlligatorEggs}
+.
+%
+% The book contains a good explanation
+% of the pitfalls of the substitution operation
+% in the Rule~\textsc{E-AppAbs},
+% which was the source of the problem
+% found in \nmName{Alligator}~(Section~\ref{sec:AlligatorEggs}).
+
+
+\begin{figure}[h]
+\footnotesize
+\begin{tabular}{p{0.47\textwidth}|p{0.47\textwidth}}
+    \textbf{Syntax} & \textbf{Evaluation} \tabularnewline[1em]
+    \begin{tabular}{r@{\hspace{0.5em}}r@{\hspace{0.5em}}lr}
+        $t$ & ::= &              & terms:      \\
+            &     & $x$          & variable    \\
+            & |   & $\abs{x}{t}$ & abstraction \\
+            & |   & $\app{t}{t}$ & application \\
+            &     &              &             \\
+        $v$ & ::= &              & values:     \\
+            &     & $\abs{x}{t}$ &
+    \end{tabular}
+&
+    \renewcommand{\arraystretch}{3.0}
+    \begin{tabular}{cr}
+        $\inferrule*[Right=E-AppAbs]
+            { }
+            {\app{(\abs{x}{t_{12}})}{v_2}\ \longrightarrow\ \subst{v_2}{x}{t_{12}}}$ \label{rule:E-AppAbs} & \\
+        $\inferrule*[Right=E-App1]
+            {t_1\ \longrightarrow\ t_1'}
+            {\app{t_1}{t_2}\ \longrightarrow\ \app{t_1'}{t_2}}$ & \\
+        $\inferrule*[Right=E-App2]
+            {t_2\ \longrightarrow\ t_2'}
+            {\app{v_1}{t_2}\ \longrightarrow\ \app{v_1}{t_2'}}$ & 
+    \end{tabular}
+\end{tabular}
+\caption{The untyped lambda calculus (\plName{UntypedLambda}).}
+\label{fig:language-definition-untypedlambda}
+\end{figure}
+  
+
+\subsection{TypedArith}
+\label{sec:language-definition-typedarith}
+
+We define here the language \plName{TypedArith},
+used in Section~\ref{sec:Typing}.
+Figure~\ref{fig:language-definition-typedarith}
+shows its syntax and evaluation (reduction) rules
+and Figure~\ref{fig:language-definition-typedarith-types}
+shows its typing rules.
+%but here all the rules are shown together.
+%
+The appeal
+of using this language to present a notional machine
+focused on the types is its simplicity.
+Terms don't require type annotations
+and the typing rules don't require a type environment.
+In fact,
+Pierce uses it as
+the simplest example of a typed language
+when introducing type safety.
+
+
+
+\begin{figure}[h]
+\footnotesize
+\begin{tabular}{p{0.47\textwidth}|p{0.47\textwidth}}
+    \textbf{Syntax} & \textbf{Evaluation} \tabularnewline[1em]
+    \begin{tabular}{r@{\hspace{0.5em}}r@{\hspace{0.5em}}l@{\hspace{0.5em}}r}
+
+              $t$ & ::= &                       & terms:          \\
+                  &     & $\true$               & constant true   \\
+                  & |   & $\false$              & constant false  \\
+                  & |   & $\ift{t}{t}{t}$       & conditional     \\
+                  & |   & $\zero$               & constant zero   \\
+                  & |   & $\succt{t}$           & successor       \\
+                  & |   & $\predt{t}$           & predecessor     \\
+                  & |   & $\iszerot{t}$         & zero test       \\
+                  &     &                       &                 \\
+              $v$ & ::= &                       & values:         \\
+                  &     & $\true$               &                 \\
+                  & |   & $\false$              &                 \\
+                  & |   & $\mathit{nv}$         &                 \\
+                  &     &                       &                 \\
+    $\mathit{nv}$ & ::= &                       & numeric values: \\
+                  &     & $\zero$               &                 \\
+                  & |   & $\succt{\mathit{nv}}$ &                 \\
+    \end{tabular}
+&
+    \renewcommand{\arraystretch}{2.5}
+    \begin{tabular}{c@{\hspace{0.5em}}r}
+        $\inferrule*[Right=E-IfTrue]
+            { }
+            {\ift{\true}{t_2}{t_3}\ \longrightarrow\ t_2}$ & \\
+        $\inferrule*[Right=E-IfFalse]
+            { }
+            {\ift{\false}{t_2}{t_3}\ \longrightarrow\ t_3}$ & \\
+        $\inferrule*[Right=E-If]
+            {t_1\ \longrightarrow\ t_1'}
+            {\ift{t_1}{t_2}{t_3}\\\ \longrightarrow\ \ift{t_1'}{t_2}{t_3}}$ & \\
+                        \vspace*{-1.5em} & \\[0.0em]
+        $\inferrule*[Right=E-Succ]
+            {t_1\ \longrightarrow\ t_1'}
+            {\succt{t_1}\ \longrightarrow\ \succt{t_1'}}$ & \\
+                        \vspace*{-1.5em} & \\[0.0em]
+        $\inferrule*[Right=E-PredZero]
+            { }
+            {\predt{\zero}\ \longrightarrow\ \zero}$ & \\
+        $\inferrule*[Right=E-PredSucc]
+            { }
+            {\predt{(\succt{\mathit{nv}_1})}\ \longrightarrow\ \mathit{nv}_1}$ & \\
+        $\inferrule*[Right=E-Pred]
+            {t_1\ \longrightarrow\ t_1'}
+            {\predt{t_1}\ \longrightarrow\ \predt{t_1'}}$ & \\
+                        \vspace*{-1.5em} & \\[0.0em]
+        $\inferrule*[Right=E-IszeroZero]
+            { }
+            {\iszerot{\zero}\ \longrightarrow\ \true}$ & \\
+        $\inferrule*[Right=E-IszeroSucc]
+            { }
+            {\iszerot{(\succt{\mathit{nv}_1})}\ \longrightarrow\ \false}$ & \\
+        $\inferrule*[Right=E-IsZero]
+            {t_1\ \longrightarrow\ t_1'}
+            {\iszerot{t_1}\ \longrightarrow\ \iszerot{t_1'}}$ & 
+    \end{tabular}
+\end{tabular}
+\caption{Syntax and reduction rules of the \plName{TypedArith} language.}
+\label{fig:language-definition-typedarith}
+\end{figure}
+
+
+\begin{figure}[h]
+\footnotesize
+\begin{tabular}{p{0.47\textwidth}|p{0.47\textwidth}}
+    \textbf{Syntax} & \textbf{Typing rules} \tabularnewline[1em]
+    \begin{tabular}{r@{\hspace{0.5em}}r@{\hspace{0.5em}}l@{\hspace{1.0em}}r}
+        $T$ & ::= &         & types:                  \\
+            &     & $\Bool$ & type of booleans        \\
+            & |   & $\Nat$  & type of natural numbers \\
+    \end{tabular}
+&
+    \renewcommand{\arraystretch}{2.5}
+    \begin{tabular}{cr}
+        $\inferrule*[Right=T-True]
+            { }
+            {\true : \Bool}$ & \\
+        $\inferrule*[Right=T-False]
+            { }
+            {\false : \Bool}$ & \\
+        $\inferrule*[Right=T-If]
+            {t_1 : \Bool \\ t_2 : T \\ t_3 : T}
+            {\ift{t_1}{t_2}{t_3} : T}$ & \\
+        $\inferrule*[Right=T-Zero]
+            { }
+            {\zero : \Nat}$ & \\
+        $\inferrule*[Right=T-Succ]
+            {t_1 : \Nat}
+            {\succt{t_1} : \Nat}$ & \\
+        $\inferrule*[Right=T-Pred]
+            {t_1 : \Nat}
+            {\predt{t_1} : \Nat}$ & \\
+        $\inferrule*[Right=T-IsZero]
+            {t_1 : \Nat}
+            {\iszerot{t_1} : \Bool}$ & 
+    \end{tabular}
+\end{tabular}
+\caption{Syntax of types and typing rules of the \plName{TypedArith} language.}
+\label{fig:language-definition-typedarith-types}
+\end{figure}
+
+
+
+\subsection{TypedLambdaRef}
+\label{sec:language-definition-typedlambdaref}
+
+% \begin{meta}
+% \begin{itemize}
+%     \item Made of lambda simply typed lem the calculus plus type doris plus you init sequence references and tuples
+%     \item Typing rules are missing because in the notion of machine we are focused on evaluation
+%     \item  briefly explains superscript
+%     \item  notice that the store which is manipulated in rules so and so needs to be carried over through all the other rules
+%     \item Only the reduction rules for sequence references and to pose are shown. The reduction rules for the rest of the language are similar to what was shown before except for the store then needs to be thread through
+% \end{itemize}
+% \end{meta}
+
+In Section~\ref{sec:State},
+we showed the language \plName{TypedLambdaRef},
+used
+to design a notional machine that focuses on references.
+%     \item Made of lambda simply typed lem the calculus plus type doris plus you init sequence references and tuples
+This language is composed of
+the simply-typed lambda calculus,
+the \plName{TypedArith} language,
+tuples,
+the $\Unit$ type,
+sequencing, and
+references.
+%
+Our goal is again simplicity and
+this is the simplest language we need for the examples in the book that use the diagram.
+%
+Figure~\ref{fig:language-definition-typedlambdaref} shows its syntax and evaluation (reduction) rules.
+%     \item Only the reduction rules for sequence references and to pose are shown. The reduction rules for the rest of the language are similar to what was shown before except for the store then needs to be thread through
+We show only
+the reduction rules for
+sequencing,
+references, and
+tuples
+because
+the rules for the rest of the language
+are similar to what we showed before,
+except for the store then needs to be threaded through all the rules.
+%
+Although that is a typed language,
+we don't present its typing rules
+because
+the notional machine in Section~\ref{sec:State} is
+focused only on its runtime behavior and not its types.
+
+
+\begin{figure}[h]
+\footnotesize
+\begin{tabular}{p{0.47\textwidth}|p{0.47\textwidth}}
+    \textbf{Syntax} & \textbf{Evaluation} \\[1em]
+    \begin{tabular}{r@{\hspace{0.5em}}r@{\hspace{0.5em}}l@{\hspace{0.5em}}r}
+        $t$ & ::= &                             & terms:              \\
+            &     &                             &                     \\
+            &     & $x$                         & variable            \\
+            & |   & $\tyabs{x}{T}{t}$           & abstraction         \\
+            & |   & $\app{t}{t}$                & application         \\
+            &     &                             &                     \\
+            & |   & $\true$                     & boolean true        \\
+            & |   & $\false$                    & boolean false       \\
+            & |   & $\zero$                     & zero                \\
+            & |   & $\succt{t}$                 & successor           \\
+            & |   & $\predt{t}$                 & predecessor         \\
+            & |   & $\iszerot{t}$               & zero test           \\
+            &     &                             &                     \\
+            & |   & $\unit$                     & unit constant       \\
+            & |   & $\seq{t}{t}$                & sequence            \\
+            & |   & $\refr{t}$                  & reference creation  \\
+            & |   & $\deref{t}$                 & dereference         \\
+            & |   & $\assign{t}{t}$             & assignment          \\
+            & |   & $l$                         & location            \\
+            &     &                             &                     \\
+            & |   & $\Tuple{{t_i}^{i\in 1..n}}$ & tuple               \\
+            & |   & $\proj{t}{i}$               & projection          \\
+            &     &                             &                     \\
+        $v$ & ::= &                             & values:             \\
+            &     & $\tyabs{x}{T}{t}$           &                     \\
+            & |   & $\true$                     &                     \\
+            & |   & $\false$                    &                     \\
+            & |   & $\zero$                     &                     \\
+            & |   & $\succt{v}$                 &                     \\
+            & |   & $\unit$                     &                     \\
+            & |   & $l$                         &                     \\
+            & |   & $\Tuple{{v_i}^{i\in 1..n}}$ &                     \\
+            &     &                             &                     \\
+        $T$ & ::= &                             & types:              \\
+            &     & $\Fun{T}{T}$                & function type       \\
+            & |   & $\Bool$                     & boolean type        \\
+            & |   & $\Nat$                      & natural number type \\
+            & |   & $\Unit$                     & unit type           \\
+            & |   & $\Ref{T}$                   & reference type      \\
+            & |   & $\Tuple{{T_i}^{i\in 1..n}}$ & tuple type          \\
+            &     &                             &                     \\
+      $\mu$ & ::= &                             & store:              \\
+            &     & $\emptyset$                 & empty store         \\
+            & |   & $\mu, l \mapsto v$          & location binding    \\
+    \end{tabular}
+    &
+    \renewcommand{\arraystretch}{2.5}
+    \begin{tabular}{cr}
+        $\inferrule*[Right=E-Seq] 
+            {t_1 | \mu\ \longrightarrow\ t'_1 | \mu'}
+            {\seq{t_1}{t_2} | \mu\ \longrightarrow\ \seq{t'_1}{t_2} | \mu'}$ & \\
+        $\inferrule*[Right=E-SeqNext] 
+            { }
+            {\seq{\unit}{t_2} | \mu\ \longrightarrow\ t_2 | \mu}$ & \\
+         & \\
+        $\inferrule*[Right=E-RefV] 
+            {l \notin \mathit{dom}(\mu)}
+            {\refr{v_1} | \mu\ \longrightarrow\ l | (\mu, l \mapsto v_1)}$ & \\
+        $\inferrule*[Right=E-Ref] 
+            {t_1 | \mu\ \longrightarrow\ t'_1 | \mu'}
+            {\refr{t_1} | \mu\ \longrightarrow\ \refr{t'_1} | \mu'}$ & \\
+        $\inferrule*[Right=E-DerefLoc] 
+            {\mu(l) = v}
+            {\deref{l} | \mu\ \longrightarrow\ v | \mu}$ & \\
+        $\inferrule*[Right=E-Deref] 
+            {t_1 | \mu\ \longrightarrow\ t'_1 | \mu'}
+            {\deref{t_1} | \mu\ \longrightarrow\ \deref{t'_1} | \mu'}$ & \\
+        $\inferrule*[Right=E-Assign] 
+            { }
+            {\assign{l}{v_2} | \mu\ \longrightarrow\ \unit | [l \mapsto v_2]\mu}$ & \\
+        $\inferrule*[Right=E-Assign1] 
+            {t_1 | \mu\ \longrightarrow\ t'_1 | \mu'}
+            {\assign{t_1}{t_2} | \mu\ \longrightarrow\ \assign{t'_1}{t_2} | \mu'}$ & \\
+        $\inferrule*[Right=E-Assign2] 
+            {t_2 | \mu\ \longrightarrow\ t'_2 | \mu'}
+            {\assign{v_1}{t_2} | \mu\ \longrightarrow\ \assign{v_1}{t'_2} | \mu'}$ & \\
+         & \\
+        $\inferrule*[Right=E-ProjTuple] 
+            { }
+            {\proj{\Tuple{{v_i}^{i\in 1..n}}}{j} | \mu\ \longrightarrow\ v_j | \mu}$ & \\
+        $\inferrule*[Right=E-Proj] 
+            {t_1 | \mu\ \longrightarrow\ t'_1 | \mu'}
+            {\proj{t_1}{i} | \mu\ \longrightarrow\ \proj{t'_1}{i} | \mu'}$ & \\
+        $\inferrule*[Right=E-Tuple] 
+            {t_j | \mu\ \longrightarrow\ t'_j | \mu'}
+            {\Tuple{{v_i}^{i\in 1..j-1}, t_j, {t_k}^{k\in j+1..n}} | \mu \\
+               \ \longrightarrow\ \Tuple{{v_i}^{i\in 1..j-1}, t'_j, {t_k}^{k\in j+1..n}} | \mu'}$ & \\
+    \end{tabular}
+\end{tabular}
+\caption{\plName{TypedLambdaRef}: Syntax and Evaluation}
+\label{fig:language-definition-typedlambdaref}
+\end{figure}
+
+
+
+
+

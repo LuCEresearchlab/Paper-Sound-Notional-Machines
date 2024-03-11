@@ -1,0 +1,130 @@
+
+% ### Notional Machines vs. Conceptual Model
+% 
+% The original acception (or acceptation) of notional machine referred to dynamic semantics but the Working Group showed that the modern acception of the term is broader. The definition as “pedagogical devices that assist the understanding of some aspect of programs are programming” is more aligned with modern uses of the term so include also static semantics. For example, x/50 notional machines described in the paper are about static semantic. In this way, notional machine is equal to conceptual model ( the working group also had something to about this).
+% 
+% An advantage of using the term conceptual model is that it seems it’s connotation is of something that is less ad-hoc. Notional machine seems something more like a toy to help teaching so something less foundational. An interesting use of the term conceptual model in the paper is in the phrase “to help learners acquire a conceptual model valid for common task”. So a conceptual model is something you can acquire, something on the same level of  “model of computation”. But that’s what we mean when we use the term notional machine: a didactic model of computation or a didactic model to reason about computation. It’s interesting to look at a few examples to elicit the differences in use of these terms. For example, a Stack&Heap diagram is in the same level of the Environment Model which is on the same level of the Substitution Model. All of these are models of computation, are models used to reason about computation. But although one would say that the S&H diagram is a notional machine, few would say the substitution model is a notional machine.
+% 
+% Another connotation of conceptual is “way of thinking”, e.g. about semantics. That’s good because NM seems optional and costly and conceptual model is required!
+
+
+
+% From: A Grounded Conceptual Model for Ownership Types in Rust
+% Our work continues a line of CS education research about conceptual models. Bayman and Mayer [1988] ￿rst showed that an appropriate conceptual model for BASIC could help students “develop fewer misconceptions [...] and perform better on transfer tests.” du Boulay [1986] coined the term “notional machine” for conceptual models speci￿cally of a language’s dynamic semantics, which has received renewed focus in recent years [Dickson et al. 2020]. Our work di￿ers from most research on notional machines by focusing equally on a conceptual model of static semantics.
+% 
+% Layers:
+% Informal model <--> concrete representation
+% Formal model   <--> abstract representation
+% Implementation
+
+
+% From: Notional Machines in Computing Education: The Education of Attention
+% “A notional machine is the idealised model of the computer implied by the constructs of the programming language.”
+% NM is effectively a special kind of conceptual model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+\label{sec:RelatedWork}
+
+
+% - nms are for static and dynamic semantics
+The term notional machine
+was coined by~\citet{duboulayDifficultiesLearningProgram1986} to refer to
+``the idealised model of the computer implied by the constructs of the programming language''.
+Therefore it
+restricts the use of notional machines as means to help understand the runtime behavior of a program or the dynamic semantics of a language.
+\citet{fincherNotionalMachinesComputing2020}, a working group that included du Boulay,
+has a thorough literature review and discussion of the term notional machine
+and
+established a broader definition
+as
+``pedagogic devices to assist the understanding of some aspect of programs or programming'',
+which includes
+uses of notional machines as means to help understand the static semantics of a language.
+% e.g.
+The ``Expressions as Trees'' notional machine~\citep{fincherNotionalMachinesComputing2020},
+for example,
+is used for both.
+We adopt here this broader view of notional machine.
+
+% - nms vs. conceptual models
+Another related and important term is conceptual model.
+\citet{fincherNotionalMachinesComputing2020} states that a
+``notional machine is effectively a special kind of conceptual model.''
+That's important because
+conceptual models,
+such as the Substitution Model and the Environment Model used
+in the SICP book (Structure and Interpretation of Computer Programs)~\cite{abelsonStructureInterpretationComputer1996},
+and SICPJS~\cite{abelsonStructureInterpretationComputer2022},
+for example,
+are well understood to be essential for reasoning about programs.
+Notional machines that are sound are indeed conceptual models.
+The concrete representation of the notional machine
+can be thought of as embodying the visualization of this conceptual model.
+
+% - modeling layers
+Although the examples presented here use only small languages,
+the same approach can be used for larger languages.
+We see
+the dynamic and static conceptual models
+to reason about Ownership Types in Rust~\citep{crichtonGroundedConceptualModel2023}
+as such an example.
+% fits nicely in our framework
+The authors present two models: a dynamic and a static.
+In our framework,
+each model can be seen as a notional machine.
+The authors divide each model into a formal model (about which formal statements can be made), which would correspond to the abstract representation of the notional machine,
+and an informal model, which would correspond to the concrete representation of the notional machine.
+%
+In the dynamic model,
+our PL layer would be the Rust language
+and
+our NM layer would be Miri.
+%
+In the static model,
+our PL layer would be the Polonius model of borrow checking
+and
+our NM layer would be the \emph{permissions model} of borrow checking
+(introduced by the authors).
+
+%\begin{meta}
+%\begin{itemize}
+%    \item Felleisen ``On the expressive power of programming languages''~\cite{felleisenExpressivePowerProgramming1991}
+%\end{itemize}
+%\end{meta}
+The idea of simulating or representing a program by means of another program is an old one, 
+and was first studied in detail in the 1970s by~\citet{milnerAlgebraicDefinitionSimulation1971} and~\citet{hoareProofCorrectnessData1972}. 
+Many of our \nms{} illustrate a reduction, stepping, or evaluation `aspect' of a programming language. 
+\citet{wadlerProgrammingLanguageFoundations2020} descriptions of how to relate such reduction systems with simulation, lock-step simulation, and bisimulation.
+The commutative diagram describing the desired property of a \nm{} appears in many places in the literature, and is a basic concept in Category Theory. Closer to our application is its use as `promotion condition'~\cite{birdPromotionAccumulationStrategies1984,wangRefactoringPatternMatching2013}.
+%Some notional machines focus on representing reduction,
+%and thus $f$ represent reduction rules.
+%For other notional machines,
+%the $f$ do not represent reduction rules,
+%but they may be arbitrary projections to some property.
+
+% Berry and K\"olling~\cite{berryDesignImplementationNotional2013}
+Where computing education researchers capture program behavior through \nms{}, programming language researchers instead use semantics~\cite{krishnamurthiProgrammingParadigms2019}. Our work can be seen as a rather standard approach to show the correctness of one kind of semantics of (part of) a programming language, most often the operational semantics, with respect to another semantics, often a reduction semantics. An example of such an approach has been described by~\citet{clementsModelingAlgebraicStepper2001}, whose Elaboration Theorem describes a property that is very similar to our soundness requirement.
+%
+The lack of a formal approach to showing the soundness of \nms{} is also noted by~\citet{pollockTheiaAutomaticallyGenerating2019}, who develop a formal approach to specifying correct program state visualization tools, based on an executable semantics of the programming language formulated in the K framework~\citep{rosuOverviewSemanticFramework2010}.
+In this paper we study a broader collection of \nms{} than just program state visualization tools, and we apply our approach to study the soundness of \nms{}.
+
+
+
+Computing educators practitioners use a diverse set of \nms{}~\cite{fincherNotionalMachinesComputing2020}.
+%Dickson and Dragon~\cite{dicksonMemoryDiagramAll2021} describe an approach to consistently developing memory diagrams, but they do not formalise their approach. 
+%Dickson et al.~\cite{dicksonExperiencesImplementingUtilizing2022} ...
+Some \nms{} form the basis of automated tools.
+The BlueJ IDE,
+which features prominently in an introductory programming textbook~\cite{kollingObjectsFirstJava2017},
+includes a graphical user interface to visualize objects, invoke methods, and inspect object state.
+PythonTutor~\cite{guoOnlinePythonTutor2013}, an embeddable web-based program visualization system,
+is used by hundreds of thousands of users to visualize the execution of code written in Python, Java, JavaScript, and other programming languages.
+UUhistle~\cite{sorvaUUhistleSoftwareTool2010}, a ``visual program simulation'' system, takes a different approach:
+instead of visualizing program executions, it requires students to perform the execution steps in a constrained interactive environment.
+When developing such widely used tools, starting from a sound \nm{} is essential.
+
+
+\citet{dicksonExperiencesImplementingUtilizing2022} discuss the issues around developing and using a \nm{} in class. They note, amongst others, ``that a \nm{} must by definition be correct, but a student's mental model of the \nm{} often is not'', and that ``specifying a \nm{} was more difficult than we thought it would be''. Our work can help in developing a \nm{}, and pointing out flaws in it. 
+
+

@@ -1,0 +1,60 @@
+%format A_PL
+%format a_PL
+%format A_NM
+%format a_NM
+%format B_PL
+%format b_PL
+%format B_NM
+%format B'_NM
+%format b_NM
+%format b'_NM
+%format f_PL
+%format f_NM
+
+%format t_i
+
+%format UL = U"\lambda"
+%format Term_UL
+%format TermUL = Term_UL
+%format Env_UL
+%format EnvUL = Env_UL
+%format Store_UL
+%format StoreUL = Store_UL
+
+%format Term_TyArith
+%format Type_TyArith
+%format Type_ExpTutor
+%format TyTerm_TyArith
+%format f_TyArith
+
+%format alpha = "\alpha"
+%format alpha'
+%format alpha_A
+%format alpha_B
+%format alpha'_B
+%format alpha_inv = "\inv{" alpha "}"
+%format alpha_circ = alpha "^{\circ}"
+%format alpha_A_inv = "\inv{" alpha_A "}"
+%format alpha_A_circ = alpha_A "^{\circ}"
+%format alpha_mB
+%format alpha_Term
+%format alpha_Type
+%format alpha_Term_circ = alpha_Term "^{\circ}"
+%format alpha_TyTerm
+%format alpha_TyTerm_circ = alpha_TyTerm "^{\circ}"
+%format alpha_JavaExp
+
+%format <=< = "\circ_M"
+
+%format Q_PL
+%format i_PL
+%format q_i_PL
+%format v_i_PL
+%format Q_NM
+%format i_NM
+%format q_i_NM
+%format v_i_NM
+
+%format exp_id
+
+%format Java_exp

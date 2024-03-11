@@ -1,0 +1,83 @@
+\section{Designing Sound Notional Machines}
+\label{chr:Modeling}
+
+
+We can only begin to talk about the soundness of a notional machine if we have a
+formal description of the programming language the notional machine is focused
+on.
+%
+We use a set of small programming languages with well-known formalizations
+described in
+Pierce's Types and Programming Languages (TAPL) book~\citep{pierceTypesProgrammingLanguages2002}.
+The languages are used to
+explore different aspects of programming language semantics.
+%
+%Throughout this chapter,
+%these languages are used
+%in various examples
+%that explore different aspects of the design of notional machines.
+%
+Table~\ref{tab:examples-designing-nms}
+shows
+the notional machines
+we use in this section
+as well as
+the corresponding programming language
+and aspect of the semantics of the programming language
+that the notional machine focuses on.
+%
+We use the first example also to introduce the definition of soundness for notional machines.
+
+We model each programming language and notional machine in Haskell.
+The models are executable,
+so they include implementations of the programming languages
+(including parsers, interpreters, and type-checkers),
+the notional machines,
+and the relationship between them%
+\footnote{%
+The artifact containing a superset of the examples in this paper
+is at
+\textsc{Anonymous}.
+%\url{https://github.com/LuCEresearchlab/sound-notional-machines}.
+}.
+The soundness proofs presented in this section are done using equational reasoning~\citep{gibbonsCalculatingFunctionalPrograms2002,birdAlgebraicIdentitiesProgram1989}.
+%An implementation of the commutative diagrams of all the \nms{} presented in the thesis is available in an accompanying artifact.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|r||l|l|l|}
+        \hline
+        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
+        \ref{sec:ExpTree}  & \nmName{ExpTree}           & \plName{UntypedLambda}  & Evaluation \\ \hline
+        \ref{sec:ExpTutor} & \nmName{ExpTutorDiagram}   & \plName{UntypedLambda}  & Evaluation \\ \hline
+        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
+        % \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & step\\\hline
+        \ref{sec:State}    & \nmName{TAPLMemoryDiagram} & \plName{TypedLambdaRef} & References \\ \hline
+        \ref{sec:Typing}   & \nmName{TypedExpTutorDiagram}   & \plName{TypedArith}     & Types      \\ \hline
+    \end{tabular}
+    \caption{Notional machines, programming languages, and aspects of focus
+    used in Section~\ref{chr:Modeling}.}
+    \label{tab:examples-designing-nms}
+\end{table}
+
+\input{sections/BijectiveNM}
+
+\input{sections/InjectiveNM}
+
+\input{sections/TAPLMemoryDiagramNM}
+
+\input{sections/TypedExpTutorNM}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Conclusion}
+% In this chapter, we have defined sound notional machines
+% and shown how we can use the definition to devise a methodology to design notional machines that are sound by construction.
+% We used the methodology to design
+% different notional machines that
+% focus on various aspects of
+% multiple programming languages.
+% In the next chapter, 
+% we will use the definition to devise a methodology for analyzing existing notional machines.

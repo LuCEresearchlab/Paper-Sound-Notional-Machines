@@ -1,0 +1,48 @@
+\section{Analyzing Existing Notional Machines: The Case of Alligator Eggs}
+\label{chr:RevealingInconsistencies}
+
+So far we have seen
+how we can design sound \nms{} by
+constructing \ensuremath{\Varid{f}_{\Conid{NM}}} using \ensuremath{\Varid{f}_{\Conid{PL}}} and
+functions that convert between \ensuremath{\Conid{A}_{\Conid{PL}}} and \ensuremath{\Conid{A}_{\Conid{NM}}}.
+%
+Now we will analyze an existing \nm{}.
+We will use its informal description to construct all components of the commutative diagram.
+In particular, here,
+we have a description
+of \ensuremath{\Varid{f}_{\Conid{NM}}} entirely in terms of \ensuremath{\Conid{A}_{\Conid{NM}}}.
+%
+We then use property-based testing, using the soundness condition as a property,
+to uncover an unsoundness in the \nm{}
+and suggest improvements that eliminate the unsoundness.
+
+
+\input{sections/AlligatorNM}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Conclusion}
+
+%In this chapter,
+%we have seen
+%how we can
+%analyze existing notional machines
+%with respect to their soundness
+%and, as a result,
+%find inconsistencies and improve them.
+%%
+%We also discussed the challenges of designing a concrete representation for a notional machine.
+
+%The analyses in this chapter
+%were made simpler by our use of \plName{UntypedLambda} as
+%the programming language under the focus of the notional machines.
+%%
+%In contrast,
+%in the next chapter,
+%we will use essentially the same technique to analyze and improve a notional machine that is focused on Java,
+%a much larger language.
+

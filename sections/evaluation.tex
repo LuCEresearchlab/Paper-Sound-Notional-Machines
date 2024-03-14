@@ -1,0 +1,116 @@
+\section{Evaluation}
+\label{chr:evaluation}
+
+\begin{table}[]
+\begin{tabular}{|l||r|l|l|}
+\hline
+\textbf{Form}  & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
+\hline
+\hline
+Analogy        & 19    & 51.35\%    & yes \\ \hline
+Representation & 17    & 45.95\%    & yes \\ \hline
+Both           & 1     & 2.70\%     & -   \\ \hline
+\hline
+\textbf{Total} & 37    & 100.00\%   & -   \\
+\hline
+\end{tabular}
+\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their form.}
+\label{tab:nm-classification-form}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l||r|l|l|}
+\hline
+\textbf{Broad Focus} & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
+\hline
+\hline
+Eval Construct & 27    & 72.97\%   & yes \\ \hline
+Data Structure & 3     & 8.11\%    & yes \\ \hline
+Type-checking  & 2     & 5.41\%    & yes \\ \hline
+Parsing Prog   & 2     & 5.41\%    & yes \\ \hline
+??             & 2     & 5.41\%    & -   \\ \hline
+Logic Gates    & 1     & 2.70\%    & no  \\ \hline
+\hline
+\textbf{Total} & 37    & 100.00\%  & -   \\
+\hline
+\end{tabular}
+\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their broad focus.}
+\label{tab:nm-classification-broad-focus}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l||r|l|l|}
+\hline
+\textbf{Narrow Focus} & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
+\hline
+\hline
+Memory          & 7     & 18.92\%   & yes \\ \hline
+Variables       & 5     & 13.51\%   & yes \\ \hline
+Arrays          & 4     & 10.81\%   & yes \\ \hline
+Functions       & 3     & 8.11\%    & yes \\ \hline
+Expression      & 3     & 8.11\%    & yes \\ \hline
+Method Calls    & 2     & 5.41\%    & no  \\ \hline
+Control Flow    & 2     & 5.41\%    & no  \\ \hline
+Call Stack      & 2     & 5.41\%    & no  \\ \hline
+??              & 2     & 5.41\%    & -   \\ \hline
+Tracing         & 1     & 2.70\%    & no  \\ \hline
+Recursion       & 1     & 2.70\%    & yes \\ \hline
+Parsing         & 1     & 2.70\%    & yes \\ \hline
+Objects         & 1     & 2.70\%    & no  \\ \hline
+Logic Operation & 1     & 2.70\%    & no  \\ \hline
+List            & 1     & 2.70\%    & yes \\ \hline
+HashSets        & 1     & 2.70\%    & no  \\ \hline
+\hline
+\textbf{Total} & 37    & 100.00\%   & -   \\
+\hline
+\end{tabular}
+\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their narrow focus.}
+\label{tab:nm-classification-narrow-focus}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l||l|l|l|}
+\hline
+\textbf{Notional Machine}      & \textbf{Form} & \textbf{Broad Focus} & \textbf{Narrow Focus} \\ \hline
+\hline
+\hline
+Array a Row of Parkings Spaces & Analogy        & Eval Construct & Arrays       \\ \hline
+List a Stack of Boxes          & Analogy        & Data Structure & List         \\ \hline
+ExpTree                        & Representation & Eval Construct & -            \\ \hline
+ExpTutorDiagram                & Representation & Eval Construct & -            \\ \hline
+TAPLMemoryDiagram              & Representation & Eval Construct & References   \\ \hline
+TypedExpTutorDiagram           & Representation & Type-checking  & -            \\ \hline
+AlligatorEggs                  & Analogy        & Eval Construct & -            \\ \hline
+\end{tabular}
+\caption{Notional machines analyzed in this paper classified according to dare form, broad focus, and narrow focus.}
+\label{tab:our-nm-classification}
+\end{table}
+
+\subsection{Expressing Complex Language Semantics}
+\label{sec:more-complexity}
+
+% - modeling layers
+Although the examples presented here use only small languages,
+the same approach can be used for larger languages.
+We see
+the dynamic and static conceptual models
+to reason about Ownership Types in Rust~\citep{crichtonGroundedConceptualModel2023}
+as such an example.
+% fits nicely in our framework
+The authors present two models: a dynamic and a static.
+In our framework,
+each model can be seen as a notional machine.
+The authors divide each model into a formal model (about which formal statements can be made), which would correspond to the abstract representation of the notional machine,
+and an informal model, which would correspond to the concrete representation of the notional machine.
+%
+In the dynamic model,
+our PL layer would be the Rust language
+and
+our NM layer would be Miri.
+%
+In the static model,
+our PL layer would be the Polonius model of borrow checking
+and
+our NM layer would be the \emph{permissions model} of borrow checking
+(introduced by the authors).
+

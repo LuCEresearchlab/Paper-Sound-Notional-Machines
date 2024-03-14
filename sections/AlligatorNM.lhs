@@ -27,7 +27,7 @@ nameToColor = undefined
 
 %% NM x Lang x Op:
 %% Alligator x UntypedLambda x eval
-\subsection{Informal Description}
+\subsection{Debugging a Notional Machine: The Case of Alligator Eggs}
 \label{sec:AlligatorEggs}
 
 % \begin{meta}
@@ -63,6 +63,11 @@ nameToColor = undefined
 % \end{itemize}
 % \end{meta}
 
+\todo Missing topics:
+\begin{itemize}
+\item Connect with previous section
+\item Describe better where property based testing comes in
+\end{itemize}
 
 % one line summary
 Alligator Eggs\footnote{\url{http://worrydream.com/AlligatorEggs/}} is a game
@@ -72,7 +77,7 @@ It is essentially a \nm{} for the untyped lambda-calculus.
 %
 The game has three kinds of pieces and is guided by three rules.
 
-\subsubsection{Pieces}
+\paragraph{Pieces}
 The pieces are \emph{hungry alligators}, \emph{old alligators}, and \emph{eggs}.
 Old alligators are white, while hungry alligators and eggs are colored with colors other than white.
 The pieces are placed in a plane and their relative position with respect to each other determines their relationship.
@@ -81,7 +86,7 @@ An alligator together with the pieces that may be guarded by it form a family.
 Families placed to the right of another family may be eaten by the guardian of the family on the left, depending on the applicability of the gameplay rules.
 Every egg must be guarded by an alligator with the same color (this must be a hungry alligator because eggs cannot be white).
 
-\subsubsection{Rules}
+\paragraph{Rules}
 There are three rules that determine the ``evolution of families" over time:
 % In every round, each rule is applied to the first family (the topmost leftmost family on the plane), unless specified otherwise.
 
@@ -105,7 +110,7 @@ There are three rules that determine the ``evolution of families" over time:
 %%
 %These puzzles could be embedded into a board game, where the player needs to solve puzzles to make progress.
 
-\subsubsection{Relation to the Untyped Lambda-Calculus}
+\paragraph{Relation to the Untyped Lambda-Calculus}
 According to their description, the way \nmName{Alligator} relates to the untyped lambda-calculus is as follows:
 ``A hungry alligator is a lambda abstraction,
 an old alligator is parentheses,
@@ -118,7 +123,7 @@ Although very close, this relation is not completely accurate.
 We will identify the limitations and propose solutions.
 
 
-\subsection{Illustrative Example}
+\subsubsection{Illustrative Example}
 %\todo build another example because egss can't be alone.
 Figure~\ref{fig:alligator-diagram} shows a representation of
 the evaluation of the lambda-calculus term
@@ -169,7 +174,7 @@ dia = (diagramWithError . t)
 \end{figure}
 
 
-\subsection{Commutative Diagram}
+\subsubsection{Commutative Diagram}
 
 To build a commutative diagram for \nmName{Alligator},
 we need to build the abstract representation of the \nm{} |A_NM|, which corresponds to the game pieces and the game board,
@@ -266,7 +271,7 @@ alpha     (App e1 e2)            =   alpha e1 ++ alpha e2
 
 
 
-\subsubsection{From Proof to Property-Based Testing}
+\paragraph{From Proof to Property-Based Testing}
 % connect with what we've seen so far. where are we?
 % So far we have seen several examples of how we can cast a \nm{} as a simulation of some aspect of a corresponding programming language
 % and use this construction to reason about the soundness of a \nm{}.
@@ -307,7 +312,7 @@ a generator generates terms |t_i :: TermUL| and checks that |(f_NM . alpha) t_i 
 \end{figure}
 
 
-\subsubsection{de Bruijn Alligators}
+\paragraph{de Bruijn Alligators}
 The first challenge is that we need to compare values of type |[AlligatorFamily]| that were produced using |f_NM| with values produced using |step|.
 As we have seen, the colors in |AlligatorFamily| correspond to variable names
 but the way |step| generates fresh names (which then are turned into colors)
@@ -374,7 +379,7 @@ type AlligatorFamily = AlligatorFamilyF Color
     \label{fig:commutativeDiagramAlligator-v2}
 \end{figure}
 
-\subsubsection{Evaluation Strategy}
+\paragraph{Evaluation Strategy}
 % now we have the setup to run the tests
 With this setup in place, the next step is to implement |f_NM| in terms of the game rules.
 %
@@ -500,7 +505,7 @@ we will simply reduce the term all the way to a value
 and correspondingly define |f_NM| to be the successive applications of |evolve| until we reach a fixpoint.
 
 
-\subsection{Problem: Substitution of Bound Variables}
+\subsubsection{Problem: Substitution of Bound Variables}
 % should we explore the question "in what order should the rules be applied?"
 Now we have all the building blocks of the commutative diagram.
 We can put them together by 

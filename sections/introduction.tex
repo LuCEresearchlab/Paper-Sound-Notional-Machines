@@ -254,9 +254,9 @@ This paper makes the following contributions:
         modelling the notional machine and
         the aspect of the programming language under its focus,
         %
-        relating them via simulation and
+        relating them via simulation. %and
         %
-        using property-based testing to find counterexamples where the simulation fails.
+        %using property-based testing to find counterexamples where the simulation fails.
 
         We
         demonstrate
@@ -265,12 +265,19 @@ This paper makes the following contributions:
         % applying it
         analyzing
         % \emph{M2} is applied to
-        an existing \nm{},
-        pointing out an unsoundness, and suggesting directions for improvement (Section~\ref{chr:RevealingInconsistencies}).
+        existing \nms{},
+        pointing out unsoundnesses, and suggesting directions for improvement (Section~\ref{chr:RevealingInconsistencies}).
 \end{itemize}
 
-We then present, in Section~\ref{sec:ConcreteSyntax}, a brief discussion
-about the abstract and concrete representations of a notional machine.
+A brief discussion about the abstract and concrete representations of a notional machine
+follows
+in Section~\ref{sec:ConcreteSyntax}.
+We then
+evaluate the framework we are proposing to reason about notional machines
+by comparing the notional machines analyzed
+in Section~\ref{chr:Modeling} and Section~\ref{chr:RevealingInconsistencies}
+to an existing dataset of 50 notional machines.
+We classify the notional machines in the dataset according to various dimensions and show that the notional machines we analyzed are representative of the design space of notional machines used in practice.
 Section~\ref{sec:RelatedWork} discusses related work
 and Section~\ref{sec:Conclusions} concludes.
 

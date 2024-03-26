@@ -1,5 +1,39 @@
 \section{Evaluation}
-\label{chr:evaluation}
+\label{chr:Evaluation}
+
+%We then
+%evaluate the entire framework
+%by comparing the notional machines that appeared
+%in Section~\ref{chr:Modeling} and Section~\ref{chr:RevealingInconsistencies}
+%to an existing dataset of \numOfNMs notional machines.
+%
+%We classify the notional machines in the dataset according to various dimensions and show that the notional machines we analyzed are representative of the design space of notional machines used in practice.
+
+The notional machines we presented so far,
+are meant not only to exemplify how to use our framework to reason about notional machines
+but also were chosen to be representative of the design space of notional machines used in practice.
+%
+To characterize this design space we analyzed the notional machines in the dataset captured by~\citet{fincherNotionalMachinesComputing2020}
+and classified them according to three dimensions.
+For each dimension,
+we present the values (the categories) of the dimension,
+the count and percentage of notional machines that fall into each value,
+and
+whether at least one of the notional machines we analyzed falls into each value.
+
+%
+The first dimension is the form of the notional machine (Table~\ref{tab:nm-classification-form}),
+which can be
+metaphorical (primarely inspired by and represented with real world objects) or
+diagrammatic (represented with diagrams).
+The distinction between the two is not always clear-cut,
+given that
+a notional machine may mix both forms
+and
+some real world objects can be represented diagrammatically.
+%
+Nevertheless this distinction is useful because metaphorical notional machines may be more difficult to be made sound, given the existing degrees of freedom and constraints of the real world objects they are inspired by.
+
 
 \begin{table}[]
 \begin{tabular}{|l||r|l|l|}
@@ -7,16 +41,26 @@
 \textbf{Form}  & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
 \hline
 \hline
-Analogy        & 19    & 51.35\%    & yes \\ \hline
-Representation & 17    & 45.95\%    & yes \\ \hline
+Metaphorical        & 19    & 51.35\%    & yes \\ \hline
+Diagramatic & 17    & 45.95\%    & yes \\ \hline
 Both           & 1     & 2.70\%     & -   \\ \hline
 \hline
-\textbf{Total} & 37    & 100.00\%   & -   \\
+\textbf{Total} & \numOfNMs    & 100.00\%   & -   \\
 \hline
 \end{tabular}
 \caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their form.}
 \label{tab:nm-classification-form}
 \end{table}
+
+
+The second dimension is the broad focus of the notional machine (Table~\ref{tab:nm-classification-broad-focus}).
+We say \emph{broad} focus because,
+although
+most notional machines in the dataset focused on the runtime semantics of a programming language construct
+(or set of constructs),
+we wanted to distinguish these notional machines from others that focus on other aspects of programs,
+such as type-checking or parsing.
+
 
 \begin{table}[]
 \begin{tabular}{|l||r|l|l|}
@@ -24,63 +68,84 @@ Both           & 1     & 2.70\%     & -   \\ \hline
 \textbf{Broad Focus} & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
 \hline
 \hline
-Eval Construct & 27    & 72.97\%   & yes \\ \hline
-Data Structure & 3     & 8.11\%    & yes \\ \hline
-Type-checking  & 2     & 5.41\%    & yes \\ \hline
-Parsing Prog   & 2     & 5.41\%    & yes \\ \hline
-??             & 2     & 5.41\%    & -   \\ \hline
-Logic Gates    & 1     & 2.70\%    & no  \\ \hline
+Evaluation     & 30    & 70\%    & yes \\ \hline
+Data Structure & 3     & xx\%    & yes \\ \hline
+Type-checking  & 2     & xx\%    & yes \\ \hline
+Parsing        & 2     & xx\%    & yes \\ \hline
+??             & 2     & xx\%    & -   \\ \hline
+Logic Gates    & 1     & xx\%    & no  \\ \hline
 \hline
-\textbf{Total} & 37    & 100.00\%  & -   \\
+\textbf{Total} & \numOfNMs    & 100.00\%  & -   \\
 \hline
 \end{tabular}
 \caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their broad focus.}
 \label{tab:nm-classification-broad-focus}
 \end{table}
 
+
+The  third dimension
+breaks down the notion of machines that focus on evaluation into the specific constructs they focus on (Table~\ref{tab:nm-classification-narrow-focus}).
+
+
 \begin{table}[]
 \begin{tabular}{|l||r|l|l|}
 \hline
-\textbf{Narrow Focus} & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
+\textbf{Focused Construct} & \textbf{Count} & \textbf{Percentage} & \textbf{Covered} \\
 \hline
 \hline
-Memory          & 7     & 18.92\%   & yes \\ \hline
-Variables       & 5     & 13.51\%   & yes \\ \hline
-Arrays          & 4     & 10.81\%   & yes \\ \hline
-Functions       & 3     & 8.11\%    & yes \\ \hline
-Expression      & 3     & 8.11\%    & yes \\ \hline
-Method Calls    & 2     & 5.41\%    & no  \\ \hline
-Control Flow    & 2     & 5.41\%    & no  \\ \hline
-Call Stack      & 2     & 5.41\%    & no  \\ \hline
-??              & 2     & 5.41\%    & -   \\ \hline
-Tracing         & 1     & 2.70\%    & no  \\ \hline
-Recursion       & 1     & 2.70\%    & yes \\ \hline
-Parsing         & 1     & 2.70\%    & yes \\ \hline
-Objects         & 1     & 2.70\%    & no  \\ \hline
-Logic Operation & 1     & 2.70\%    & no  \\ \hline
-List            & 1     & 2.70\%    & yes \\ \hline
-HashSets        & 1     & 2.70\%    & no  \\ \hline
+Memory  &  7  &  23.33\%  & yes \\ \hline
+Variables  &  4  &  13.33\%  & yes \\ \hline
+Arrays  &  4  &  13.33\%  & yes \\ \hline
+Functions  &  3  &  10.00\%  & yes \\ \hline
+Method Calls  &  2  &  6.67\%  & no \\ \hline
+Control Flow  &  2  &  6.67\%  & no \\ \hline
+Call Stack  &  2  &  6.67\%  & no \\ \hline
+Tracing  &  1  &  3.33\%  & no \\ \hline
+String literals  &  1  &  3.33\%  & no \\ \hline
+Procedure  &  1  &  3.33\%  & no \\ \hline
+Objects  &  1  &  3.33\%  & no \\ \hline
+Instructions  &  1  &  3.33\%  & no \\ \hline
+Expression  &  1  &  3.33\%  & yes \\ \hline
+%Memory          & 7     & 18.92\%   & yes \\ \hline
+%Variables       & 5     & 13.51\%   & yes \\ \hline
+%Arrays          & 4     & 10.81\%   & yes \\ \hline
+%Functions       & 3     & 8.11\%    & yes \\ \hline
+%Expression      & 3     & 8.11\%    & yes \\ \hline
+%Method Calls    & 2     & 5.41\%    & no  \\ \hline
+%Control Flow    & 2     & 5.41\%    & no  \\ \hline
+%Call Stack      & 2     & 5.41\%    & no  \\ \hline
+%??              & 2     & 5.41\%    & -   \\ \hline
+%Tracing         & 1     & 2.70\%    & no  \\ \hline
+%Recursion       & 1     & 2.70\%    & yes \\ \hline
+%Parsing         & 1     & 2.70\%    & yes \\ \hline
+%Objects         & 1     & 2.70\%    & no  \\ \hline
+%Logic Operation & 1     & 2.70\%    & no  \\ \hline
+%List            & 1     & 2.70\%    & yes \\ \hline
+%HashSets        & 1     & 2.70\%    & no  \\ \hline
 \hline
-\textbf{Total} & 37    & 100.00\%   & -   \\
+\textbf{Total} & 30    & 70.00\%   & -   \\
 \hline
 \end{tabular}
 \caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their narrow focus.}
 \label{tab:nm-classification-narrow-focus}
 \end{table}
 
+
+We then classified the notion of machines shown in Section~\ref{chr:Modeling} and Section~\ref{chr:RevealingInconsistencies} according to these dimensions.
+
 \begin{table}[]
 \begin{tabular}{|l||l|l|l|}
 \hline
-\textbf{Notional Machine}      & \textbf{Form} & \textbf{Broad Focus} & \textbf{Narrow Focus} \\ \hline
+\textbf{Notional Machine}      & \textbf{Form} & \textbf{Broad Focus} & \textbf{Focused Construct} \\ \hline
 \hline
 \hline
-Array a Row of Parkings Spaces & Analogy        & Eval Construct & Arrays       \\ \hline
+Array a Row of Parkings Spaces & Analogy        & Evaluation     & Arrays       \\ \hline
 List a Stack of Boxes          & Analogy        & Data Structure & List         \\ \hline
-ExpTree                        & Representation & Eval Construct & -            \\ \hline
-ExpTutorDiagram                & Representation & Eval Construct & -            \\ \hline
-TAPLMemoryDiagram              & Representation & Eval Construct & References   \\ \hline
+ExpTree                        & Representation & Evaluation     & -            \\ \hline
+ExpTutorDiagram                & Representation & Evaluation     & -            \\ \hline
+TAPLMemoryDiagram              & Representation & Evaluation     & References   \\ \hline
 TypedExpTutorDiagram           & Representation & Type-checking  & -            \\ \hline
-AlligatorEggs                  & Analogy        & Eval Construct & -            \\ \hline
+AlligatorEggs                  & Analogy        & Evaluation     & -            \\ \hline
 \end{tabular}
 \caption{Notional machines analyzed in this paper classified according to dare form, broad focus, and narrow focus.}
 \label{tab:our-nm-classification}

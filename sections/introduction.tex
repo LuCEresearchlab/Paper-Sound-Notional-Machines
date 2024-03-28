@@ -1,5 +1,32 @@
 \section{Introduction}
 
+\begin{wrapfigure}{r}{.50\textwidth}
+%(λx.λy. x) a b
+%\begin{figure}
+    \centering
+    \begin{diagram}[width=0.45\textwidth]
+import Diagrams.Prelude hiding (trace, _fontSize)
+
+import NotionalMachines.Lang.UntypedLambda.Main (Exp (..), parse)
+import NotionalMachines.LangInMachine.UntypedLambdaExpressionTree (diagramTrace)
+import NotionalMachines.Machine.ExpressionTree.BubbleDiagram (toDiagram', _fontSize, _framePadding)
+import NotionalMachines.Meta.Steppable (Steppable (trace))
+import NotionalMachines.Util.Diagrams (diagramWithError)
+import NotionalMachines.Examples.Diagrams (langAndNMTrace)
+
+toDia = toDiagram' (def { _fontSize = 0.12, _framePadding = 0.04 })
+t = langAndNMTrace 0.05
+                   (diagramTrace toDia)
+                   (fmap trace . parse)
+
+dia = (diagramWithError . t)
+      "(\\t. \\f. t) a b"
+    \end{diagram}
+    \caption{Evaluation of the term $\texttt{\app{\app{(\abs{t}{(\abs{f}{t})})}{a}}{b}}$ shown with the \nm{} \nmName{ExpTree}.}
+    \label{fig:takeFirst}
+%\end{figure}
+\end{wrapfigure}
+
 % - learning programming an notional machines
 Learning to program involves learning how to express a program in a programming language, 
 but also learning what the semantics of such a program is. 
@@ -25,31 +52,6 @@ and can help to explain the step-by-step evaluation of such expressions.
 \citet{fincherNotionalMachinesComputing2020} interviewed computer science teachers
 to build up a collection of over 50 \nms{}\footnote{\url{https://notionalmachines.github.io/notional-machines.html}}.
 
-%(λx.λy. x) a b
-\begin{figure}
-    \centering
-    \begin{diagram}[width=0.45\textwidth]
-import Diagrams.Prelude hiding (trace, _fontSize)
-
-import NotionalMachines.Lang.UntypedLambda.Main (Exp (..), parse)
-import NotionalMachines.LangInMachine.UntypedLambdaExpressionTree (diagramTrace)
-import NotionalMachines.Machine.ExpressionTree.BubbleDiagram (toDiagram', _fontSize, _framePadding)
-import NotionalMachines.Meta.Steppable (Steppable (trace))
-import NotionalMachines.Util.Diagrams (diagramWithError)
-import NotionalMachines.Examples.Diagrams (langAndNMTrace)
-
-toDia = toDiagram' (def { _fontSize = 0.12, _framePadding = 0.04 })
-t = langAndNMTrace 0.05
-                   (diagramTrace toDia)
-                   (fmap trace . parse)
-
-dia = (diagramWithError . t)
-      "(\\t. \\f. t) a b"
-    \end{diagram}
-    \caption{Evaluation of $\texttt{\app{\app{(\abs{t}{(\abs{f}{t})})}{a}}{b}}$ in programming language (top) and \nmName{ExpTree} \nm{} (bottom).}
-    \label{fig:takeFirst}
-\end{figure}
-{
 
 % - the quality of an NM is important.
 \subsection{Unsound \NMs{}}

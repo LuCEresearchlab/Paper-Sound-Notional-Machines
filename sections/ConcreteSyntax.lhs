@@ -13,21 +13,6 @@ module ConcreteSyntax where
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Abstract vs. Concrete Syntax of Notional Machines}
 \label{sec:ConcreteSyntax}
-
-% - general idea
-The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
-%
-But there is a distinction between the data structure that represents the \nm{} and how it is visualized.
-Those differences are akin to the difference between the concrete and the abstract syntax of a language.
-Like a programming language, a \nm{} has a concrete and an abstract syntax as well.
-We also refer to those as concrete and abstract representations of a \nm{}.
-%
-Notice that the concrete representation of a \nm{} may not only be a diagram or image that can be depicted on paper
-but it could also be made of physical objects
-or enacted with students.
-%
-In fact, many \nms{} are ludic in nature or are built around a metaphor, so the concrete representation of a \nm{} is very important.
-
 %
 \begin{wrapfigure}{r}{.2\textwidth}
 % \begin{figure}
@@ -53,6 +38,21 @@ dia = (diagramWithError . diagram)
     \label{fig:two-alligator-representations}
 % \end{figure}
 \end{wrapfigure}
+
+% - general idea
+The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
+%
+But there is a distinction between the data structure that represents the \nm{} and how it is visualized.
+Those differences are akin to the difference between the concrete and the abstract syntax of a language.
+Like a programming language, a \nm{} has a concrete and an abstract syntax as well.
+We also refer to those as concrete and abstract representations of a \nm{}.
+%
+Notice that the concrete representation of a \nm{} may not only be a diagram or image that can be depicted on paper
+but it could also be made of physical objects
+or enacted with students.
+%
+In fact, many \nms{} are ludic in nature or are built around a metaphor, so the concrete representation of a \nm{} is very important.
+
 %
 Figure~\ref{fig:concrete-abstract} shows
 the different layers at play here.

@@ -63,12 +63,6 @@ nameToColor = undefined
 % \end{itemize}
 % \end{meta}
 
-\todo Missing topics:
-\begin{itemize}
-\item Connect with previous section
-\item Describe better where property based testing comes in
-\end{itemize}
-
 % one line summary
 Alligator Eggs\footnote{\url{http://worrydream.com/AlligatorEggs/}} is a game
 conceived by Bret Victor to introduce the lambda-calculus in a playful way.
@@ -209,6 +203,13 @@ and their relationship with |TermUL| to model |A_NM|.
         %Like parentheses, old alligators are used to disambiguate an abstract syntax tree.
 \end{description}
 
+% what about App
+Now let's look at the terms of the untyped lambda-calculus.
+If hungry alligators are lambda abstractions and eggs are variables then what is an application?
+Applications are formed by the placement of pieces on the game board.
+When an alligator family or egg (corresponding to a term \texttt{$t_1$}) is placed to the left of another family or egg (corresponding to a term \texttt{$t_2$}),
+then this corresponds to the term \texttt{$t_1$} applied to \texttt{$t_2$} (in lambda calculus represented as $\app{t_1}{t_2}$).
+
 \begin{wrapfigure}{r}{.35\textwidth}
 % \begin{figure}
 \centering
@@ -224,13 +225,6 @@ dia = (diagramWithError . diagram)
 \label{fig:OldAlligator}
 % \end{figure}
 \end{wrapfigure}
-
-% what about App
-Now let's look at the terms of the untyped lambda-calculus.
-If hungry alligators are lambda abstractions and eggs are variables then what is an application?
-Applications are formed by the placement of pieces on the game board.
-When an alligator family or egg (corresponding to a term \texttt{$t_1$}) is placed to the left of another family or egg (corresponding to a term \texttt{$t_2$}),
-then this corresponds to the term \texttt{$t_1$} applied to \texttt{$t_2$} (in lambda calculus represented as $\app{t_1}{t_2}$).
 
 % - eggs can't be alone because only lambdas are values
 Notice that because 

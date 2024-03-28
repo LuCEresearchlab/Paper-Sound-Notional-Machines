@@ -87,6 +87,8 @@ langToNM = foldr (Stack . Box . show) Pallet
 \end{code}
 %endif
 
+% todo
+% - why uncons
 
 %% NM x Lang x Op:
 %% ListAsStack x List x (cons, head, tail, etc.)
@@ -103,7 +105,7 @@ instead focused on data structures.
 One such notional machine,
 which we model in this section,
 is the ``List as Stack of Boxes'' (Figure~\ref{fig:nm-list-as-stack}),
-described by~\citep{duboulayHowWorkLOGO1976} and included in the dataset of notional machines analyzed by~\citep{fincherNotionalMachinesComputing2020}.
+described by~\citet{duboulayHowWorkLOGO1976} and included in the dataset of notional machines analyzed by~\citet{fincherNotionalMachinesComputing2020}.
 
 %\subsubsection{Illustrative Example}
 
@@ -132,25 +134,60 @@ In the case of
 which was focused on type-checking (the static semantics of \plName{TypedArith}),
 |A_PL| also represented a program in that language and |f_PL| performed type-checking.
 %
-Now we will model a notional machine focused on a data structure so |A_PL| represents that data structure and there are several |f_PL| functions, one for each operation supported by that data structure.
+Now we will model a notional machine focused on a data structure, so |A_PL| represents that data structure and there are several |f_PL| functions, one for each operation supported by that data structure.
 The type |A_NM| can be seen as an abstraction of |A_PL| and it should provide corresponding operations.
 The commutation of the diagram demonstrates the correctness of this abstraction.
 
 %\subsubsection{Commutative Diagram}
 
-Using ``List as Stack of Boxes'' as an example,
-we can define a list as a data structure that supports three operations (|Empty| and |Cons| to construct the list and |uncons| to deconstruct a list).
+Consider,
+for example,
+the \nm{} ``List as Stack of Boxes'',
+described by~\citet{duboulayHowWorkLOGO1976} (Figure~\ref{fig:nm-list-as-stack} shows the original illustration).
+Modeling it required some adaptations to the original description:
+\begin{enumerate}
+% - partiality of ops
+\item
+To avoid issues caused by the partiality of the operations typically used to access the head and tail of a list (FIRST and REST in the original \nm{} description),
+we define a list using three operations: |Empty| and |Cons| to construct a list and \mbox{|uncons :: List a -> Maybe (a, List a)|} to deconstruct it.
+That change will also have a covenient representation in the \nm{}.
+% - Show instance
+\item
+In the stack of boxes, each value is shown as a |String| in a box,
+which means we can only represent lists of values for which we can create a |String| representation.
+% - empty stack
+\item
+The original description
+wasn't explicit about the \nm{} representation of an empty list.
+We need a corresponding empty stack of boxes that can be treated as a stack and not just the absence of boxes. For that we will use a pallet (used to hold boxes in storage).
 %
-In the stack of boxes, each value is shown as a |String| (the textual representation of the value) in a box.
+The original description of the \nm{} mentions a pallet in two contexts:
+\begin{enumerate}
+\item
+``boxes are stacked on a pallet so that they can be picked up as one stack''.
+That's an important part of the \nm{}'s behavior but we also need to be able to pick up a box from the top of the stack;
+\item
+``The beginning of a list, the top of the stack, is marked with [ and
+the end of the list, the pallet is marked with ]''.
+Here there's an asymmetry between the end of the list, represented with a pallet, and the beginning of the list, which has no representation in the notional machine.
+Our denotation of pallet is different: it is the representation of an empty list.
+\end{enumerate}
 %
-The insight of the stack of boxes is that we need a representation of an empty stack of boxes that can be treated as a stack and not just the absence of boxes. For that we will use a pallet (used to hold boxes in storage).
+\end{enumerate}
 %
-To deconstruct a stack, we can pick up a box from the top of the stack.
+The result is that we can construct lists either with a pallet
+or by stacking a box on top of a stack,
+which must have eventualy a pallet at the end.
+To deconstruct it, we can pick up
+a box from the top of the stack
+(\mbox{|pickUp :: Stack -> Maybe (Box, Stack)|}).
 When trying to pick up a box,
 either there is only the pallet, in which case we get nothing,
-or there is a box on top of a stack, in which case we get the box
-and are left with the rest of the stack. \\
+or there is a box on top of a stack, in which case
+we are left with the box and the rest of the stack. \\
 
+
+%if False
 \def\commentbegin{\quad\{\ }
 \def\commentend{\}}
 \begin{minipage}[b]{0.48\textwidth}
@@ -180,5 +217,6 @@ pickUp Pallet      = Nothing
 pickUp (Stack box rest) = Just (box, rest)
 \end{code}
 \end{minipage}
+%endif
 
 

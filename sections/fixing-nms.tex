@@ -13,8 +13,32 @@ we have a description
 of \ensuremath{\Varid{f}_{\Conid{NM}}} entirely in terms of \ensuremath{\Conid{A}_{\Conid{NM}}}.
 %
 We then use property-based testing, using the soundness condition as a property,
-to uncover an unsoundness in the \nm{}
-and suggest improvements that eliminate the unsoundness.
+to uncover unsoundnesses
+and suggest improvements that eliminate them.
+%
+Table~\ref{tab:examples-fixing-nms}
+shows
+the notional machines
+we use in this section
+as well as
+the corresponding programming language
+and aspect of the semantics of the programming language
+that the notional machine focuses on.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|r||l|l|l|}
+        \hline
+        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
+        \ref{sec:ListAsStack}  & \nmName{ListAsStack}           & -  & Data Structure (List) \\ \hline
+        \ref{sec:ArrayAsParkingSpots} & \nmName{ArrayAsParkingSpots}   & \plName{Java}  & Evaluation (Arrays) \\ \hline
+        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
+        \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & Evaluation \\ \hline
+    \end{tabular}
+    \caption{Notional machines, programming languages, and aspects of focus
+    used in Section~\ref{chr:RevealingInconsistencies}.}
+    \label{tab:examples-fixing-nms}
+\end{table}
 
 
 \input{sections/ListAsStackNM}

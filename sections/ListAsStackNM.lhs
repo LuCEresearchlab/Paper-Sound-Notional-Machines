@@ -145,10 +145,10 @@ The commutation of the diagram demonstrates the correctness of this abstraction.
 %for example,
 Modelling
 %the \nm{}
-``List as Stack of Boxes'',
+``List as Stack of Boxes''
 %described by~\citet{duboulayHowWorkLOGO1976} (Figure~\ref{fig:nm-list-as-stack} shows the original illustration).
 %Modeling it
-required some adaptations to the original description:
+requires some adaptations to the original description:
 \begin{enumerate}
 % - partiality of ops
 \item

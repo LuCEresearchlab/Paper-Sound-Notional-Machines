@@ -75,6 +75,13 @@ so |toDiagram| produces a value of type
 |Diagram B|,
 where the type parameter |B| (for Backend) determines the output format of the diagram (e.g. SVG).
 %
+In fact,
+the depictions of Alligator Eggs shown here
+are generated
+by calls to our artifact
+that are
+embedded directly into the paper.
+
 
 By decoupling the abstract from the concrete representation, a notional machine can have multiple concrete representations.
 Alligator Eggs, for example, also describes another concrete syntax that it calls ``Schematic Form''.

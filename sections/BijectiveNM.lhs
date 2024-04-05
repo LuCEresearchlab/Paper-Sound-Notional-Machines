@@ -112,7 +112,7 @@ In general, a notional machine is sound if the diagram in Figure~\ref{fig:commut
 We call the commutativity of this diagram the \emph{soundness condition} for a notional machine.
 In this diagram, the vertices are types and the edges are functions.
 We will explain the diagram while instantiating it for this illustrative example
-(the result of this instatiation is shown in Figure~\ref{fig:commutativeDiagramExpTree}).
+(the result of this instantiation is shown in Figure~\ref{fig:commutativeDiagramExpTree}).
 
 The bottom layer (|A_PL|, |f_PL|, |B_PL|) represents the aspect of a programming language%
 \footnote{%

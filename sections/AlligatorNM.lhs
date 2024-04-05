@@ -233,7 +233,7 @@ strictly speaking, an egg cannot appear all by itself.
 That corresponds to the fact that
 in the untyped lambda-calculus
 only lambda terms are values,
-so a term cannot have unbounds variables.
+so a term cannot have unbound variables.
 Textbooks, of course, often use examples with unbound variables but these are actually metavariables that stand for an arbitrary term.
 So,
 for convenience,
@@ -273,7 +273,7 @@ alpha     (App e1 e2)            =   alpha e1 ++ alpha e2
 % In practice, this reasoning was guided by a corresponding implementation for each \nm{} discussed so far,
 % which include property-based testing that help to check, among other things, that the corresponding simulation diagrams indeed commute.
 %
-The commutativity of the diagrams presented in Chapter~\ref{chr:Modeling} was demonstrated using equational reasoning.
+The commutativity of the diagrams presented in Section~\ref{chr:Modeling} was demonstrated using equational reasoning.
 % The commutative diagrams in section~\ref{sec:Modeling} and section~\ref{sec:ExpTutor} were demonstrated to indeed commute using equational reasoning.
 % In section~\ref{sec:Modeling} and section~\ref{sec:ExpTutor}, equational reasoning was used to demonstrate the commutativity of the diagrams in each section.
 Here instead, we implement the elements that constitute the commutative diagram and 
@@ -384,7 +384,7 @@ The eating rule (together with the color rule) somewhat corresponds to beta-redu
 but under what evaluation strategy?
 % Evaluation strategy: "But that yellow alligator sure is hungry, and there's a tasty red egg infront of her. Here we go again..." The original instruction describe reduction under a lambda abstraction. We had to prevent that so the reduction strategy is the same as the one implemented by the lambda calculus interpreter (call-by-value). But attention, reduction under old alligations is necessary.
 The choice of evaluation strategy turns out to affect not only the eating rule but also the old age rule.
-According to the original description, any hungry alligator that has something to eat can eat
+According to the original description, any hungry alligator that has something to eat can eat,
 and one of the original examples shows a hungry alligator eating an egg even when they are under another hungry alligator.
 That would correspond to a \emph{full beta-reduction} evaluation strategy
 but we will stick to a call-by-value lambda-calculus interpreter so we will adapt

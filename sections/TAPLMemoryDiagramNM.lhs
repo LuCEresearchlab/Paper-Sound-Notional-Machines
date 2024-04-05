@@ -161,7 +161,18 @@ But the absence of
 explicit information mapping names to values
 makes it less suitable
 to talk about aliasing,
-because even though a term may contain, at any given point during evaluation,
+because even though a term
+%
+\begin{wrapfigure}{r}{.6\textwidth}
+%\begin{figure}
+    \centering
+    \includegraphics[width=.6\textwidth]{images/tapl-references/LambdaRefTrace.pdf}
+    \caption{Using \nmName{TAPLMemoryDiagram} to trace the evaluation of $\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$}
+    \label{fig:lamdaref-trace}
+%\end{figure}
+\end{wrapfigure}
+%
+may contain, at any given point during evaluation,
 multiple occurrences of the same location,
 it is not possible to know if these locations correspond to different names,
 and one may need to trace several reduction steps back to find out when a name was substituted by a location.
@@ -177,13 +188,6 @@ we have to be careful to avoid variable capture by generating fresh names when n
     \includegraphics[width=.7\textwidth]{images/tapl-references/TAPL-ReferenceDiagram-Exercise-1311.pdf}
     \caption{\nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef} for TAPL Exercise 13.1.1}
     \label{fig:lamdaref-exercise}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=.7\textwidth]{images/tapl-references/LambdaRefTrace.pdf}
-    \caption{Trace of $\texttt{ \app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})} }$ in \nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef}}
-    \label{fig:lamdaref-trace}
 \end{figure}
 
 

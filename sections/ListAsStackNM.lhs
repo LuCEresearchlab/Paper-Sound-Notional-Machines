@@ -96,9 +96,9 @@ langToNM = foldr (Stack . Box . show) Pallet
 \label{sec:ListAsStack}
 
 Although most
-notional machines are focused on the semantics of programming language constructs,
-some notional machines are
-instead focused on data structures.
+notional machines focus on the semantics of programming language constructs,
+some notional machines 
+instead focus on data structures.
 %
 % Let's see how we can use our framework to reason about them...
 %
@@ -121,36 +121,44 @@ described by~\citet{duboulayHowWorkLOGO1976} and included in the dataset of noti
 % \end{figure}
 \end{wrapfigure}
 
-Let's see what is conceptually different
-between approaching a notional machine focused on a data structure.
-When we presented notional machines
-focused on the dynamic semantics of a language (\nmName{ExpTree}, \nmName{ExpTree}, \nmName{TAPLMemoryDiagram}),
-the type |A_PL| represented a program in the language under focus
+%Let's see what is conceptually different
+%between approaching a notional machine focused on a data structure.
+%When we presented
+For notional machines
+focussing on the dynamic semantics of a language (\nmName{ExpTree}, \nmName{ExpTree}, \nmName{TAPLMemoryDiagram}),
+the type |A_PL| represents a program in the language under focus
 (and in the case of \nmName{TAPLMemoryDiagram}, additional information needed to evaluate the program)
-and the function |f_PL| performed an evaluation step.
+and the function |f_PL| performs an evaluation step.
 %
 In the case of
 \nmName{TypedExpTutorDiagram},
-which was focused on type-checking (the static semantics of \plName{TypedArith}),
-|A_PL| also represented a program in that language and |f_PL| performed type-checking.
+which focusses on type-checking (the static semantics of \plName{TypedArith}),
+|A_PL| also represents a program in that language and |f_PL| performed type-checking.
 %
-Now we will model a notional machine focused on a data structure, so |A_PL| represents that data structure and there are several |f_PL| functions, one for each operation supported by that data structure.
+Now we will model a notional machine focussing on a data structure, so |A_PL| represents that data structure and there are several |f_PL| functions, one for each operation supported by that data structure.
 The type |A_NM| can be seen as an abstraction of |A_PL| and it should provide corresponding operations.
 The commutation of the diagram demonstrates the correctness of this abstraction.
 
 %\subsubsection{Commutative Diagram}
 
-Consider,
-for example,
-the \nm{} ``List as Stack of Boxes'',
-described by~\citet{duboulayHowWorkLOGO1976} (Figure~\ref{fig:nm-list-as-stack} shows the original illustration).
-Modeling it required some adaptations to the original description:
+%Consider,
+%for example,
+Modelling
+%the \nm{}
+``List as Stack of Boxes''
+%described by~\citet{duboulayHowWorkLOGO1976} (Figure~\ref{fig:nm-list-as-stack} shows the original illustration).
+%Modeling it
+requires some adaptations to the original description:
 \begin{enumerate}
 % - partiality of ops
 \item
-To avoid issues caused by the partiality of the operations typically used to access the head and tail of a list (FIRST and REST in the original \nm{} description),
+To avoid
+%issues caused by the
+partiality of the operations typically used to access the head and tail of a list (FIRST and REST in the original
+%\nm{}
+description),
 we define a list using three operations: |Empty| and |Cons| to construct a list and \mbox{|uncons :: List a -> Maybe (a, List a)|} to deconstruct it.
-That change will also have a covenient representation in the \nm{}.
+That change also has a covenient representation in the \nm{}.
 % - Show instance
 \item
 In the stack of boxes, each value is shown as a |String| in a box,
@@ -158,10 +166,14 @@ which means we can only represent lists of values for which we can create a |Str
 % - empty stack
 \item
 The original description
-wasn't explicit about the \nm{} representation of an empty list.
+wasn't explicit about the
+%\nm{}
+representation of an empty list.
 We need a corresponding empty stack of boxes that can be treated as a stack and not just the absence of boxes. For that we will use a pallet (used to hold boxes in storage).
 %
-The original description of the \nm{} mentions a pallet in two contexts:
+The original description
+%of the \nm{}
+mentions a pallet in two contexts:
 \begin{enumerate}
 \item
 ``boxes are stacked on a pallet so that they can be picked up as one stack''.
@@ -177,7 +189,7 @@ Our denotation of pallet is different: it is the representation of an empty list
 %
 The result is that we can construct lists either with a pallet
 or by stacking a box on top of a stack,
-which must have eventualy a pallet at the end.
+which must have eventually a pallet at the end.
 To deconstruct it, we can pick up
 a box from the top of the stack
 (\mbox{|pickUp :: Stack -> Maybe (Box, Stack)|}).

@@ -30,7 +30,7 @@ their characteristics,
 how they relate to an underlying programming language,
 and how they are used to teach programming concepts.
 
-\begin{wrapfigure}{r}{.50\textwidth}
+\begin{wrapfigure}{r}{.53\textwidth}
 %\begin{table}[]
 \begin{tabular}{|l||r|r|l|}
 \hline
@@ -70,7 +70,12 @@ on the runtime semantics (Evaluation) of a programming language construct
 so
 %
 we further
-break down these notional machines into the constructs (or set of constructs) they are primarely focused on (Table~\ref{tab:nm-classification-narrow-focus}).
+break down these notional machines into the constructs they are primarely focused on (Table~\ref{tab:nm-classification-narrow-focus}).
+%
+Some entries in the table refer to sets of related constructs.
+For example,
+the category Control Flow encompasses constructs like loops and conditional statements, which primarily affect control flow.
+%
 %
 %\nmName{TAPLMemoryDiagram} (Section~\ref{sec:State}),
 %for example,
@@ -79,18 +84,17 @@ break down these notional machines into the constructs (or set of constructs) th
 %
 Here the classification is also not clear-cut,
 not only because a notional machine may focus on multiple constructs
-but also because some constructs a related to others.
+but also because some constructs are related to others.
 For example,
 notional machines that focus on functions often (although not always) represent variables as well
 but only the ones that solely (or primarily) focus on variables are classified as such.
-The category control flow encompasses constructs like loops and conditional statements, which primarily affect control flow.
 %
 The category Misc
 includes five notional machines each of which focuses on a different construct:
-string literal,
+String literal,
 Procedure (side-effecting functions),
-objects,
-instructions (lower level operations),
+Objects,
+Instructions (lower level operations),
 and
 one that is not clear from the description.
 
@@ -98,7 +102,7 @@ one that is not clear from the description.
 
 \begin{table}[h]
     \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.48\textwidth}
         \centering
         \begin{tabular}{|l||r|r|p{1.4cm}|}
 \hline
@@ -114,10 +118,10 @@ Logic Gates  &  1  &  2.56\% & no \\ \hline
 \textbf{Total} & \numOfNMs    & 100.00\%  & -   \\
 \hline
 \end{tabular}
-\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their broad focus.}
+\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their focus.}
 \label{tab:nm-classification-broad-focus}
     \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.48\textwidth}
         \centering
 \begin{tabular}{|l||r|r|l|}
 \hline
@@ -153,7 +157,7 @@ Misc  &  5  &  12.82\% & no \\ \hline
 \textbf{Total} & 32    & 82.05\%   & -   \\
 \hline
 \end{tabular}
-\caption{Notional machines in the dataset published by \citet{fincherNotionalMachinesComputing2020} classified according to their narrow focus.}
+\caption{Notional machines that focus on evaluation broken down by the set of construct they focus on.}
 \label{tab:nm-classification-narrow-focus}
     \end{minipage}
 \end{table}

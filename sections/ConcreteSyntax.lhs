@@ -40,10 +40,12 @@ dia = (diagramWithError . diagram)
 \end{wrapfigure}
 
 % - general idea
-The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
+%The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
 %
-But there is a distinction between the data structure that represents the \nm{} and how it is visualized.
-Those differences are akin to the difference between the concrete and the abstract syntax of a language.
+When reasoning about a \nm{},
+it's important to distinguish between the data types that represents the \nm{} (the information present in |A_NM| and |B_NM|)
+and how the \nm{} is visualized.
+This difference is akin to the distinction between the concrete syntax and the abstract syntax of a language.
 Like a programming language, a \nm{} has a concrete and an abstract syntax as well.
 We also refer to those as concrete and abstract representations of a \nm{}.
 %

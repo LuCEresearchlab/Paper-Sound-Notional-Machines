@@ -44,7 +44,11 @@ type Name = String
 % \end{itemize}
 % \end{meta}
 
-A common use of \nms{} is in the context of reasoning about state\footnote{29 of the 57 \nms{} presented on \href{notionalmachines.github.io}{https://notionalmachines.github.io/notional-machines.html} at the time of this writing refer to the concept of \emph{variable} or \emph{array element}.}.
+A common use of \nms{} is in the context of reasoning about state.
+In fact, 16 of the \numOfNMs{} \nms{} in the dataset by~\citet{fincherNotionalMachinesComputing2020}
+focus on either
+References, Variables, or Arrays
+(see Section~\ref{chr:Evaluation}).
 An example of
 the use of a visual notation to represent state
 can

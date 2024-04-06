@@ -196,7 +196,11 @@ a box from the top of the stack
 When trying to pick up a box,
 either there is only the pallet, in which case we get nothing,
 or there is a box on top of a stack, in which case
-we are left with the box and the rest of the stack. \\
+we are left with the box and the rest of the stack.
+
+The process of formalizing the \nm{},
+making it precise,
+once again helped to identify the issues and improve the \nm{}.
 
 
 %if False

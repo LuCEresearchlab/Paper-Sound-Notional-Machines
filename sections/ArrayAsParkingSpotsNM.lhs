@@ -24,7 +24,7 @@ With the techniques we have developed so far,
 we can turn again to
 the notional machine
 "Array as Row of Parking Spaces is Parking Lot",
-which we presented in the Section~\ref{sec:UnsoundNotionalMachines}.
+presented in Section~\ref{sec:UnsoundNotionalMachines}.
 %
 There we considered Java as the underlying programming language
 and already identified the first issue,
@@ -40,11 +40,12 @@ we will make the notional machine more precise
 and in the process resolve two problems.
 
 % -- array as data structure
-One way to approach the problem would be to
+One approach would be to
 model the subset of Java needed for the notional machine to work,
-but Java is a fairly complex language,
-so we instead approach this problem
-in a way similar to the one taken in the last section:
+but Java is a fairly complex language.
+Instead we
+start by following the approach
+taken in the last section:
 we model the PL layer as an idealized array
 and the operations it supports.
 %
@@ -56,9 +57,12 @@ An array supports three operations:
 % -- problem: empty spaces, primitive types versus reference types
 \subsubsection{Problem: reference types versus primitive types}
 One of the appeals of the notional machine is that
-because a newly allocated array of objects
-does not contain "valid" values (their slots contain \emph{null})
-we would represent it as an empty parking lot.
+we would represent
+a newly allocated array of objects
+as an empty parking lot,
+because
+it
+does not contain "valid" values (their slots contain \emph{null}).
 %We want to keep this appeal so
 The first issue is
 %immediately revealed
@@ -94,7 +98,8 @@ and that complicates the picture.
 To represent multiple arrays,
 and the relationship between them,
 we cannot
-model the PL layer simply as an idealized array~\footnote{
+model the PL layer simply as an idealized array%
+\footnote{
 The representation of lists shown in Section~\ref{sec:ListAsStack} is not suitable to represent lists that contain lists.
 }.
 Instead,
@@ -128,12 +133,14 @@ to be able to uniquely identify each array
 (e.g.~with its location, or address).
 We annotate each parking lot with the corresponding location
 (for example using an @@ and the location identifier)
-which we use to identify the parking lot when we write
-or read from the corresponding array slot.
+which we use to identify the parking lot when we
+write to
+(or read from)
+its slots.
 
 % -- solution: use add signs
 We can then represent values of reference type using their locations.
-We could instead use arrows, like we've done in \nmName{TAPLMemoryDiagram},
-but that wouldn't work for $\refr{}$'s because here we are only representing arrays.
+We could instead use arrows, like we have done in \nmName{TAPLMemoryDiagram},
+but that would not work for $\refr{}$'s because here we are only representing arrays.
 
 

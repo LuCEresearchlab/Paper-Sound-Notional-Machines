@@ -57,7 +57,7 @@ An array supports three operations:
 \subsubsection{Problem: reference types versus primitive types}
 One of the appeals of the notional machine is that
 because a newly allocated array of objects
-doesn't contain "valid" values (their slots contain \emph{null})
+does not contain "valid" values (their slots contain \emph{null})
 we would represent it as an empty parking lot.
 %We want to keep this appeal so
 The first issue is

@@ -150,12 +150,12 @@ f_TyArith = fmap alpha_Type . typeof <=< alpha_Term_circ
 
 As is,
 a student may benefit from the \nm{}'s representation of the program's abstract syntax tree and that may be helpful to reason about typing
-but the \nm{} doesn't expose to the student the inner workings of the process of typing a term.
+but the \nm{} does not expose to the student the inner workings of the process of typing a term.
 
 The second design,
 represented in the diagram in Figure~\ref{fig:commutativeDiagramTypedArith-v2},
 tackles this issue by enriching the \nm{} in a way that allows it to go step-by-step through the typing algorithm.
-The idea is that |f_NM| now doesn't produce a type but gradually labels each subtree with its type as part of the process of typing a term.
+The idea is that |f_NM| now does not produce a type but gradually labels each subtree with its type as part of the process of typing a term.
 For this,
 |A_NM| here is |TyExpTreeDiagram|,
 which differs from |ExpTreeDiagram| by adding to each node a possible type label.

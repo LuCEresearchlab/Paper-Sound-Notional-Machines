@@ -55,7 +55,11 @@ f_PL = step
 %
 % Example: state the triplet ExpTree x UntypedLambda x eval
 As a first straightforward example, let's look at a \nm{} for teaching how evaluation works in the untyped lambda-calculus
-(we will refer to this language as \plName{UntypedLambda}\footnote{The syntax and reduction rules for \plName{UntypedLambda} are reproduced in Appendix~\ref{sec:language-definition-untypedlambda}.}).
+(we will refer to this language as \plName{UntypedLambda}%
+\footnote{The syntax and reduction rules for \plName{UntypedLambda} are reproduced in
+%Appendix~\ref{sec:language-definition-untypedlambda}
+the appendix provided as supplementary material
+.}).
 While most research papers discuss the lambda-calculus using its textual representation,
 textbooks sometimes illustrate it using tree diagrams~\citep[p.~54]{pierceTypesProgrammingLanguages2002}.
 We use this as an opportunity to define a simple \nm{} which we call \nmName{ExpTree}.%

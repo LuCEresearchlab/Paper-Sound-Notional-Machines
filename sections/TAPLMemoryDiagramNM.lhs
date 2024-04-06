@@ -56,7 +56,11 @@ also be found in
 TAPL~\citep[p.~155]{pierceTypesProgrammingLanguages2002}.
 %
 In Chapter 13 (``References''), the book
-extends the simply typed lambda-calculus with references (a language we will refer to as \plName{TypedLambdaRef}\footnote{The syntax and reduction rules for \plName{TypedLambdaRef} are reproduced in Appendix~\ref{sec:language-definition-typedlambdaref}.}).
+extends the simply typed lambda-calculus with references (a language we will refer to as \plName{TypedLambdaRef}%
+\footnote{The syntax and reduction rules for \plName{TypedLambdaRef} are reproduced in
+%Appendix~\ref{sec:language-definition-typedlambdaref}
+the appendix provided as supplementary material
+.}).
 It explains references and aliasing by introducing a visual notation to highlight the difference between a \emph{reference}
 and the \emph{cell} in the store that is pointed to by that reference.
 We will refer to this notation,

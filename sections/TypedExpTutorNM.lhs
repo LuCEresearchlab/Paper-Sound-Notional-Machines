@@ -83,7 +83,13 @@ So far we have seen examples of commutative diagrams where |f_PL| is |step|
 but in principle, |f_PL| could be any operation on |A_PL| that is the focus of a given \nm{}.
 %
 Let's look at an example of \nm{} where we do not focus on evaluating but on typing an expression.
-The language this \nm{} focuses on is \plName{TypedArith}\footnote{The syntax and typing rules for \plName{TypedArith} are reproduced in Appendix~\ref{sec:language-definition-typedarith}.}, a language of typed arithmetic expression, which is the simplest typed language introduced in TAPL~\citep[p.~91]{pierceTypesProgrammingLanguages2002}.
+The language this \nm{} focuses on is \plName{TypedArith}%
+\footnote{The syntax and typing rules for \plName{TypedArith} are reproduced in
+%Appendix~\ref{sec:language-definition-typedarith}
+the appendix provided as supplementary material
+.},
+a language of typed arithmetic expression,
+which is the simplest typed language introduced in TAPL~\citep[p.~91]{pierceTypesProgrammingLanguages2002}.
 We describe two designs.
 
 In the first design,

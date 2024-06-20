@@ -1,4 +1,4 @@
-# Sound Notional Machines - Submitted PLDI 2023
+# Sound Notional Machines Paper
 
 This is the repository for the paper.
 There is a separate repository for the artifact: [notional-machines](https://github.com/LuCEresearchlab/sound-notional-machines).

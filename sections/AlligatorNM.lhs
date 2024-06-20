@@ -195,20 +195,14 @@ and their relationship with |TermUL| to model |A_NM|.
 
     \item[Old alligators]
         % - not all parens are old allis
-        An old alligator somewhat corresponds to parentheses but not exactly.
-        The lambda abstraction in the term $\texttt{\app{\app{(\abs{t}{\abs{f}{t}})}{a}}{b}}$ requires parentheses because conventionally the body of a lambda abstraction extends as far to the right as possible, so without the parentheses its body would be $\texttt{\app{\app{t}{a}}{b}}$ instead of $\texttt{t}$.
-        However the corresponding alligator families shown in Figure~\ref{fig:alligator-diagram} don't require an old alligator.
+        At first glance, an old alligator seems to correspond to parenthesis. But that is not exactly the case.
+        The lambda abstraction in the term $\texttt{\app{\app{(\abs{t}{\abs{f}{t}})}{a}}{b}}$ requires parentheses
+        because conventionally the body of a lambda abstraction extends as far to the right as possible.
+        However, the corresponding alligator families shown in Figure~\ref{fig:alligator-diagram} don't require an old alligator.
         On the other hand, if we want to represent the term $\texttt{\app{a}{(\app{b}{c})}}$, then we need an old alligator.
         Figure~\ref{fig:OldAlligator} shows an example of a term that requires an old alligator.
         %Like parentheses, old alligators are used to disambiguate an abstract syntax tree.
 \end{description}
-
-% what about App
-Now let's look at the terms of the untyped lambda-calculus.
-If hungry alligators are lambda abstractions and eggs are variables then what is an application?
-Applications are formed by the placement of pieces on the game board.
-When an alligator family or egg (corresponding to a term \texttt{$t_1$}) is placed to the left of another family or egg (corresponding to a term \texttt{$t_2$}),
-then this corresponds to the term \texttt{$t_1$} applied to \texttt{$t_2$} (in lambda calculus represented as $\app{t_1}{t_2}$).
 
 \begin{wrapfigure}{r}{.35\textwidth}
 % \begin{figure}
@@ -221,10 +215,17 @@ dia = (diagramWithError . diagram)
       "(\\a.y) ((\\b.b) c)"
 \end{diagram}
 % \caption{Example of family with old alligator.}
-\caption{Old alligator in $\texttt{\app{(\abs{a}{y})}{(\app{(\abs{b}{b})}{c})}}$}
+\caption{Term $\texttt{\app{(\abs{a}{y})}{(\app{(\abs{b}{b})}{c})}}$ requires an old alligator.}
 \label{fig:OldAlligator}
 % \end{figure}
 \end{wrapfigure}
+
+% what about App
+Now let's look at the terms of the untyped lambda-calculus.
+If hungry alligators are lambda abstractions and eggs are variables then what is an application?
+Applications are formed by the placement of pieces on the game board.
+When an alligator family or egg (corresponding to a term \texttt{$t_1$}) is placed to the left of another family or egg (corresponding to a term \texttt{$t_2$}),
+then this corresponds to the term \texttt{$t_1$} applied to \texttt{$t_2$} (in lambda calculus represented as $\app{t_1}{t_2}$).
 
 % - eggs can't be alone because only lambdas are values
 Notice that because 

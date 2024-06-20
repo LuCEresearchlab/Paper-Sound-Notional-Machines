@@ -171,14 +171,14 @@ makes it less suitable
 to talk about aliasing,
 because even though a term
 %
-\begin{wrapfigure}{r}{.6\textwidth}
-%\begin{figure}
+%\begin{wrapfigure}{r}{.6\textwidth}
+\begin{figure}
     \centering
     \includegraphics[width=.6\textwidth]{images/tapl-references/LambdaRefTrace.pdf}
-    \caption{Using \nmName{TAPLMemoryDiagram} to trace the evaluation of $\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$}
+    \caption{Tracing the evaluation of $\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$ using \nmName{TAPLMemoryDiagram}.}
     \label{fig:lamdaref-trace}
-%\end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 %
 may contain, at any given point during evaluation,
 multiple occurrences of the same location,

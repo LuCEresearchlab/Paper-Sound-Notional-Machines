@@ -158,6 +158,32 @@ As is,
 a student may benefit from the \nm{}'s representation of the program's abstract syntax tree and that may be helpful to reason about typing
 but the \nm{} does not expose to the student the inner workings of the process of typing a term.
 
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=.30\textwidth]{images/expression-tutor/TypedArithExample1.png}
+    \hspace{1cm}
+    \includegraphics[width=.30\textwidth]{images/expression-tutor/TypedArithExample1Next.png}
+    % https://expressiontutor.org/activity/do?task=84891ae1-5133-451b-a37e-0aa81ed0f8f2
+    \caption{Representation of one step in the notional machine \nmName{TypedExpTutorDiagram} as it types the term $\ift{\iszerot{\zero}}{\succt{\zero}}{\succt{\succt{\zero}}}$ in the language \plName{TypedArith}.}
+    \label{fig:TypedArithExample}
+\end{figure*}
+
+
+\begin{table*}[h]
+    \centering
+    \begin{tabular}{||r||||l||l||l||}
+        \hline
+        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
+        \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & Evaluation \\ \hline
+        \ref{sec:ListAsStack}  & \nmName{ListAsStack}           & -  & Data Structure (List) \\ \hline
+        \ref{sec:ArrayAsParkingSpots} & \nmName{ArrayAsParkingSpots}   & \plName{Java}  & Evaluation (Arrays) \\ \hline
+        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
+    \end{tabular}
+    \caption{Notional machines, programming languages, and aspects of focus
+    used in Section~\ref{chr:RevealingInconsistencies}.}
+    \label{tab:examples-fixing-nms}
+\end{table*}
+
 The second design,
 represented in the diagram in Figure~\ref{fig:commutativeDiagramTypedArith-v2},
 tackles this issue by enriching the \nm{} in a way that allows it to go step-by-step through the typing algorithm.
@@ -189,44 +215,13 @@ The resulting \nm{} is depicted in Figure~\ref{fig:TypedArithExample}.
 %   where _fLang :: TypedTerm -> Maybe TypedTerm
 %         _fLang = eitherToMaybe . typeof1
 
-\begin{figure}[h]
-
-\[
-\begin{tikzcd}
-|TyExpTutorDiagram| \arrow[rrrrr, "|fmap alpha_TyTerm|\; \circ\; |typeof1|\; \circ_M\; |alpha_TyTerm_circ|", dashed]
-                  \arrow[ddd,   "|alpha_TyTerm_circ|"                                                     , shift left, dotted]
-& & & & &
-|Maybe TyExpTutorDiagram| \\
-\\
-\\
-|TyTerm_TyArith| \arrow[rrrrr, "|typeof1|"]
-                 \arrow[uuu,   "|alpha_TyTerm|", shift left]
-& & & & &
-|Maybe TyTerm_TyArith| \arrow[uuu, "|fmap alpha_TyTerm|", dashed]
-\end{tikzcd}
-\]
-
-    \caption{Instantiation of the commutative diagram in Figure~\ref{fig:commutativeDiagram} for a notional machine focused on type-checking programs in \plName{TypedArith}. The notional machine exposes the inner workings of the typing algorithm.}
-    \label{fig:commutativeDiagramTypedArith-v2}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.35\textwidth]{images/expression-tutor/TypedArithExample1.png}
-    \hspace{1cm}
-    \includegraphics[width=.35\textwidth]{images/expression-tutor/TypedArithExample1Next.png}
-    % https://expressiontutor.org/activity/do?task=84891ae1-5133-451b-a37e-0aa81ed0f8f2
-    \caption{One step in the notional machine \nmName{TypedExpTutorDiagram} as it types the term $\ift{\iszerot{\zero}}{\succt{\zero}}{\succt{\succt{\zero}}}$ in the language \plName{TypedArith}.}
-    \label{fig:TypedArithExample}
-\end{figure}
-
 Interestingly,
 given an expression |e|,
 once we label all nodes in the ExpressionTutor diagram of |e| with their types,
 the depiction of the resulting diagram is similar to the typing derivation tree of |e|.
 
+
+
 Note that types are themselves trees but here we're representing them in a simplified form as textual labels because
 the primary goal of ExpressionTutor is to represent the structure of terms, not the structure of types.
-
-
 

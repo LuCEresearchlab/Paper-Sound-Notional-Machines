@@ -13,9 +13,9 @@ module ConcreteSyntax where
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Abstract vs. Concrete Syntax of Notional Machines}
 \label{sec:ConcreteSyntax}
-%
-\begin{wrapfigure}{r}{.2\textwidth}
-% \begin{figure}
+
+%\begin{wrapfigure}{r}{.2\textwidth}
+\begin{figure}
     \centering
     \begin{minipage}{0.2\textwidth}
     \centering
@@ -30,14 +30,15 @@ dia = (diagramWithError . diagram)
     \begin{minipage}{0.7\textwidth}
     \vspace{0.25cm}
     % textwidth is defined by the minipage
-    \includegraphics[width=0.8\textwidth]{images/alligators/alligators-numeral-2-website.png}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/alligators/alligators-numeral-2-website.png}
     \end{minipage}
     \end{minipage}
     \caption{Multiple concrete representations.}
     %\caption{Different concrete representations of the same Alligator family in the \nmName{Alligator} \nm{}.}
     \label{fig:two-alligator-representations}
-% \end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 % - general idea
 %The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
@@ -98,14 +99,6 @@ An alligator is drawn as a line ending with a \texttt{<} for a mouth,
 and is preceded by a variable name corresponding to its color.
 An old alligator is drawn with a line without a mouth.
 An egg is drawn just with the variable name corresponding to its color.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\textwidth]{images/alligators/NM-concrete-abstract-abstract-concrete.pdf}
-    \caption{Both program and \nm{} have abstract and concrete representations.}
-    \label{fig:concrete-abstract}
-\end{figure}
-
 
 %\subsection{Designing a Concrete Representation}
 %

@@ -138,7 +138,7 @@ Such incorrect diagrams do not correspond to programs,
 thus $\alpha$ is deliberately not surjective.
 
 %(λx. x x) (λx. x x)
-\begin{figure}
+\begin{figure*}
     \centering
     \begin{tabular}{c}
         $\texttt{\app{(\abs{x}{\app{x}{x}})}{(\abs{x}{\app{x}{x}})}}$ \\
@@ -149,7 +149,7 @@ thus $\alpha$ is deliberately not surjective.
     \caption{The omega combinator in \plName{UntypedLambda} (top)
              and (incorrect) representations in \nmName{ExpTutorDiagram} \nm{} (bottom).}
     \label{fig:omegaBroken}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Illustrative Example}
 Figure~\ref{fig:omegaBroken} uses \nmName{ExpTutorDiagram} to represent the omega combinator.
@@ -201,7 +201,7 @@ This square commutes like so:
 
 \def\commentbegin{\quad\{\ }
 \def\commentend{\}}
-\begin{minipage}[b]{0.48\textwidth}
+\begin{minipage}[b]{125pt}\setlength\mathindent{-2ex}
 \begin{spec}
     f_NM . alpha_A
 ==  {- definition of |f_NM| -}
@@ -214,8 +214,8 @@ This square commutes like so:
 \end{minipage}
 \begin{minipage}[b]{0ex}{\rule[0ex]{0.5pt}{1.3in}}
 \end{minipage}
-\hspace{1ex}
-\begin{minipage}[b]{0.3\textwidth}\setlength\mathindent{2ex}
+\hspace{0ex}
+\begin{minipage}[b]{0.3\textwidth}\setlength\mathindent{0ex}
 \begin{spec}
     alpha_B . f_PL
 ==  {- definition of |alpha_B| -}
@@ -269,7 +269,11 @@ with |f_PL| equal to |step|.%
 % \end{tikzcd}
 % \]
 
-\begin{figure}
+\begin{figure*}
+
+\centering
+\begin{minipage}{\textwidth}
+\centering
 
 %% v3
 \[
@@ -294,16 +298,19 @@ with |f_PL| equal to |step|.%
 \end{tikzcd}
 \]
 
+\end{minipage}
+
     \caption{Instantiation of the commutative diagram in Figure~\ref{fig:commutativeDiagram} for the notional machine \nmName{ExpTutorDiagram}}
     \label{fig:commutativeDiagramExpTutorDiagramComplete}
-\end{figure}
+\end{figure*}
 
 % describe alpha
-The construction of a mapping \eval{:t alpha} is straightforward
+We can always construct
+a mapping |alpha|, from |TermUL| to |ExpTutorDiagram|,
 because
-a term |t :: TermUL| forms a tree
-and from it
-we can always construct a corresponding ExpressionTutor diagram |d :: ExpTutorDiagram| (a graph).
+every term |t :: TermUL| forms a tree
+and every
+ExpressionTutor diagram |d :: ExpTutorDiagram| forms a graph.
 For each possible term in |TermUL|,
 we need to define a pattern for the content of the corresponding |ExpTutorDiagram| node which will help the student identify the kind of node.
 %
@@ -327,7 +334,11 @@ we will depict the left inverse in the diagram as a dotted line pointing from |A
 and omit the path via |Maybe A_PL|
 as shown in Figure~\ref{fig:commutativeDiagramExpTutorDiagramSimplified}.
 
-\begin{figure}
+\begin{figure*}
+
+\centering
+\begin{minipage}{\textwidth}
+\centering
 
 %% v2
 \[
@@ -345,9 +356,11 @@ as shown in Figure~\ref{fig:commutativeDiagramExpTutorDiagramSimplified}.
 \end{tikzcd}
 \]
 
+\end{minipage}
+
     \caption{Simplified version of the commutative diagram for \nmName{ExpTutorDiagram} shown in Figure~\ref{fig:commutativeDiagramExpTutorDiagramComplete}.}
     \label{fig:commutativeDiagramExpTutorDiagramSimplified}
-\end{figure}
+\end{figure*}
 
 We call these monomorphic notional machines because
 there is a monomorphism (injective homomorphism)

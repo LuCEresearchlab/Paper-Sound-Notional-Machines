@@ -1,8 +1,8 @@
 \section{Introduction}
 
-\begin{wrapfigure}{r}{.50\textwidth}
+%\begin{wrapfigure}{r}{.50\textwidth}
 %(λx.λy. x) a b
-%\begin{figure}
+\begin{figure}
     \centering
     \begin{diagram}[width=0.45\textwidth]
 import Diagrams.Prelude hiding (trace, _fontSize)
@@ -24,8 +24,8 @@ dia = (diagramWithError . t)
     \end{diagram}
     \caption{Evaluation of the term $\texttt{\app{\app{(\abs{t}{(\abs{f}{t})})}{a}}{b}}$ shown with the \nm{} \nmName{ExpTree}.}
     \label{fig:takeFirst}
-%\end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 % - learning programming an notional machines
 Learning to program involves learning how to express a program in a programming language, 
@@ -48,8 +48,9 @@ and can help to explain the step-by-step evaluation of such expressions.
 % showing some aspect of a programming language (showing the expression as a tree), and
 % performing an operation on it (a step in the evaluation of an expression). 
 %A NM should help a novice in understanding the aspects for which the NM has been designed.
-\Nms{} are used widely in computer science education;
-\citet{fincherNotionalMachinesComputing2020} interviewed computer science teachers
+\Nms{} are used widely in computer science education:
+\citeauthor{fincherNotionalMachinesComputing2020}~[\citeyear{fincherNotionalMachinesComputing2020}]
+interviewed computer science teachers
 to build up a dataset of \numOfNMs{} \nms{}%
 \footnote{\url{https://notionalmachines.github.io/notional-machines.html} -
 The website lists 57 items but some of them are part of what they call a \nm{} sequence,
@@ -120,16 +121,16 @@ Educators may mischaracterize language features and
 students may end up with misconceptions~\citep{chiodiniCuratedInventoryProgramming2021} instead of profoundly understanding the language.
 
 % saves about 20 lines of text
-\begin{wrapfigure}{r}{.50\textwidth}
-% \begin{figure}[h]
-    \centering
-    \begin{tabular}{c}
-        \includegraphics[width=.50\textwidth]{images/nm-definition-cards/nm-array-as-row-of-spaces-in-parking-lot-cut}
-    \end{tabular}
+%\begin{wrapfigure}{r}{.50\textwidth}
+\begin{figure}[h]
+    %\centering
+    %\begin{tabular}{c}
+        \includegraphics[width=.47\textwidth]{images/nm-definition-cards/nm-array-as-row-of-spaces-in-parking-lot-cut}
+    %\end{tabular}
      \caption{The ``Array as Row of Spaces in Parking Lot'' \nm{} captured by~\citet{fincherNotionalMachinesComputing2020}.}
     \label{fig:parkingSpaces}
-% \end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 % - example: Array as Row of Parking Spaces
 For example,
@@ -277,6 +278,24 @@ This paper makes the following contributions:
         sometimes
         pointing out unsoundnesses, and suggesting directions for improvement (Section~\ref{chr:RevealingInconsistencies}).
 \end{itemize}
+
+\begin{table*}[h!]
+    \centering
+    \begin{tabular}{|r||l|l|l|}
+        \hline
+        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
+        \ref{sec:ExpTree}  & \nmName{ExpTree}           & \plName{UntypedLambda}  & Evaluation \\ \hline
+        \ref{sec:ExpTutor} & \nmName{ExpTutorDiagram}   & \plName{UntypedLambda}  & Evaluation \\ \hline
+        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
+        % \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & step\\\hline
+        \ref{sec:State}    & \nmName{TAPLMemoryDiagram} & \plName{TypedLambdaRef} & Evaluation (Refs) \\ \hline
+        \ref{sec:Typing}   & \nmName{TypedExpTutorDiagram}   & \plName{TypedArith}     & Type-checking      \\ \hline
+    \end{tabular}
+    \caption{Notional machines, programming languages, and aspects of focus
+    used in Section~\ref{chr:Modeling}.}
+    \label{tab:examples-designing-nms}
+\end{table*}
+
 
 A brief discussion about the distinction between the abstract and concrete representations of a notional machine
 follows

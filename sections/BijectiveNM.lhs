@@ -83,7 +83,7 @@ We use this as an opportunity to define a simple \nm{} which we call \nmName{Exp
 % \end{table}
 
 \subsubsection{Illustrative Example}
-Figure~\ref{fig:takeFirst} uses \nmName{ExpTree} to demonstrate the evaluation of a specific lambda expression,
+In Figure~\ref{fig:takeFirst}, \nmName{ExpTree} is used to demonstrate the evaluation of a specific lambda expression,
 which happens in two reduction steps.
 The top of the figure shows the terms in the traditional textual representation of the programming language,
 while the bottom shows the terms as a tree.

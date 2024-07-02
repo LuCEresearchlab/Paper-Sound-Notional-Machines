@@ -1,7 +1,6 @@
 \section{Designing Sound Notional Machines}
 \label{chr:Modeling}
 
-
 We can only begin to talk about the soundness of a notional machine if we have a
 formal description of the programming language the notional machine is focused
 on.
@@ -42,23 +41,6 @@ is at
 }.
 The soundness proofs presented in this section are done using equational reasoning~\citep{gibbonsCalculatingFunctionalPrograms2002,birdAlgebraicIdentitiesProgram1989}.
 %An implementation of the commutative diagrams of all the \nms{} presented in the thesis is available in an accompanying artifact.
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{|r||l|l|l|}
-        \hline
-        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
-        \ref{sec:ExpTree}  & \nmName{ExpTree}           & \plName{UntypedLambda}  & Evaluation \\ \hline
-        \ref{sec:ExpTutor} & \nmName{ExpTutorDiagram}   & \plName{UntypedLambda}  & Evaluation \\ \hline
-        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
-        % \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & step\\\hline
-        \ref{sec:State}    & \nmName{TAPLMemoryDiagram} & \plName{TypedLambdaRef} & Evaluation (Refs) \\ \hline
-        \ref{sec:Typing}   & \nmName{TypedExpTutorDiagram}   & \plName{TypedArith}     & Type-checking      \\ \hline
-    \end{tabular}
-    \caption{Notional machines, programming languages, and aspects of focus
-    used in Section~\ref{chr:Modeling}.}
-    \label{tab:examples-designing-nms}
-\end{table}
 
 \input{sections/BijectiveNM}
 

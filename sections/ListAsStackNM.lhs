@@ -110,16 +110,16 @@ described by~\citet{duboulayHowWorkLOGO1976} and included in the dataset of noti
 %\subsubsection{Illustrative Example}
 
 % saves about 20 lines of text
-\begin{wrapfigure}{r}{.50\textwidth}
-% \begin{figure}[h]
-    \centering
-    \begin{tabular}{c}
-        \includegraphics[width=.50\textwidth]{images/nm-definition-cards/nm-list-as-stack}
-    \end{tabular}
+%\begin{wrapfigure}{r}{.50\textwidth}
+\begin{figure}[h]
+    %\centering
+    %\begin{tabular}{c}
+        \includegraphics[width=.47\textwidth]{images/nm-definition-cards/nm-list-as-stack}
+    %\end{tabular}
      \caption{The ``List as Stack of Boxes'' \nm{} as described by~\citet{duboulayHowWorkLOGO1976}.}
     \label{fig:nm-list-as-stack}
-% \end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 %Let's see what is conceptually different
 %between approaching a notional machine focused on a data structure.

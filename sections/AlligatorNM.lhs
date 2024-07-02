@@ -20,8 +20,8 @@ type Name = String
 
 newtype Color = MkColor { colorContent :: Double }
 
-nameToColor :: Name -> Color
-nameToColor = undefined
+n2c :: Name -> Color
+n2c = undefined
 \end{code}
 %endif
 
@@ -105,6 +105,28 @@ There are three rules that determine the ``evolution of families" over time:
 %These puzzles could be embedded into a board game, where the player needs to solve puzzles to make progress.
 
 \paragraph{Relation to the Untyped Lambda-Calculus}
+
+\begin{figure*}[h]
+    \centering
+    \begin{diagram}[width=0.9\textwidth]
+import Diagrams.Prelude hiding (trace)
+
+import NotionalMachines.Lang.UntypedLambda.Main (Exp (..), parse)
+import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs (diagramTrace)
+import NotionalMachines.Meta.Steppable (Steppable (trace))
+import NotionalMachines.Util.Diagrams (diagramWithError)
+import NotionalMachines.Examples.Diagrams (langAndNMTrace)
+
+t = langAndNMTrace 0.05 diagramTrace (fmap trace . parse)
+
+dia = (diagramWithError . t)
+      "(\\t. (\\f. t) a) (\\b. b)"
+      -- "(\\t. \\f. t) a b"
+    \end{diagram}
+    \caption{Evaluation of $\texttt{\app{(\abs{t}{\app{(\abs{f}{t})}{a}})}{(\abs{b}{b})}}$ in the untyped lambda calculus (top) and \nmName{Alligator} \nm{} (bottom).}
+    \label{fig:alligator-diagram}
+\end{figure*}
+
 According to their description, the way \nmName{Alligator} relates to the untyped lambda-calculus is as follows:
 ``A hungry alligator is a lambda abstraction,
 an old alligator is parentheses,
@@ -120,7 +142,7 @@ We will identify the limitations and propose solutions.
 \subsubsection{Illustrative Example}
 %\todo build another example because egss can't be alone.
 Figure~\ref{fig:alligator-diagram} shows a representation of
-the evaluation of the lambda-calculus term
+evaluating the term
 $\texttt{\app{(\abs{t}{\app{(\abs{f}{t})}{a}})}{(\abs{b}{b})}}$
 using the \nmName{Alligator} \nm{}.
 % Note: this is equivalent to the Expression Tree example from Figure~\ref{fig:takeFirst}
@@ -145,27 +167,6 @@ no eggs are hatched
 because it was not guarding any grey eggs.
 We are left with the purple family.
 
-
-\begin{figure}
-    \centering
-    \begin{diagram}[width=0.9\textwidth]
-import Diagrams.Prelude hiding (trace)
-
-import NotionalMachines.Lang.UntypedLambda.Main (Exp (..), parse)
-import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs (diagramTrace)
-import NotionalMachines.Meta.Steppable (Steppable (trace))
-import NotionalMachines.Util.Diagrams (diagramWithError)
-import NotionalMachines.Examples.Diagrams (langAndNMTrace)
-
-t = langAndNMTrace 0.05 diagramTrace (fmap trace . parse)
-
-dia = (diagramWithError . t)
-      "(\\t. (\\f. t) a) (\\b. b)"
-      -- "(\\t. \\f. t) a b"
-    \end{diagram}
-    \caption{Evaluation of $\texttt{\app{(\abs{t}{\app{(\abs{f}{t})}{a}})}{(\abs{b}{b})}}$ in the untyped lambda calculus (top) and \nmName{Alligator} \nm{} (bottom).}
-    \label{fig:alligator-diagram}
-\end{figure}
 
 
 \subsubsection{Commutative Diagram}
@@ -204,8 +205,8 @@ and their relationship with |TermUL| to model |A_NM|.
         %Like parentheses, old alligators are used to disambiguate an abstract syntax tree.
 \end{description}
 
-\begin{wrapfigure}{r}{.35\textwidth}
-% \begin{figure}
+%\begin{wrapfigure}{r}{.35\textwidth}
+\begin{figure}
 \centering
 \begin{diagram}[width=.35\textwidth]
 import NotionalMachines.Util.Diagrams
@@ -217,8 +218,8 @@ dia = (diagramWithError . diagram)
 % \caption{Example of family with old alligator.}
 \caption{Term $\texttt{\app{(\abs{a}{y})}{(\app{(\abs{b}{b})}{c})}}$ requires an old alligator.}
 \label{fig:OldAlligator}
-% \end{figure}
-\end{wrapfigure}
+\end{figure}
+%\end{wrapfigure}
 
 % what about App
 Now let's look at the terms of the untyped lambda-calculus.
@@ -240,28 +241,29 @@ So,
 for convenience,
 we will consider that an egg by itself also forms a family.
 
-We can then model an alligator family as the type |AlligatorFamily|,
+We can then model an alligator family with the type |AlligatorFamily|,
 and a game board as simply a list of alligator families.
 The result is
 the commutative diagram shown in Figure~\ref{fig:commutativeDiagramAlligator-v1}.
 
 \begin{spec}
-data AlligatorFamily  =  HungryAlligator Color [AlligatorFamily]
-                      |  OldAlligator [AlligatorFamily]
-                      |  Egg Color
+data AlligatorFamily = 
+     HungryAlligator Color [AlligatorFamily]
+  |  OldAlligator [AlligatorFamily]
+  |  Egg Color
 \end{spec}
 % \begin{code}
 % type Board = [AlligatorFamily]
 % \end{code}
 
-The abstraction function |alpha| relies on some function \eval{:t nameToColor}.
+The abstraction function |alpha| relies on some function (|n2c|) to map from names to colors.
 
 \begin{code}
-alpha ::  TermUL                 ->  [AlligatorFamily]
-alpha     (Var name)             =   [Egg (nameToColor name)]
-alpha     (Lambda name e)        =   [HungryAlligator (nameToColor name) (alpha e)]
-alpha     (App e1 e2@(App _ _))  =   alpha e1 ++ [OldAlligator (alpha e2)]
-alpha     (App e1 e2)            =   alpha e1 ++ alpha e2
+alpha :: TermUL -> [AlligatorFamily]
+alpha    (Var name) = [Egg (n2c name)]
+alpha    (Lambda name e) = [HungryAlligator (n2c name) (alpha e)]
+alpha    (App e1 e2@(App _ _)) = alpha e1 ++ [OldAlligator (alpha e2)]
+alpha    (App e1 e2) = alpha e1 ++ alpha e2
 \end{code}
 
 
@@ -347,7 +349,11 @@ type AlligatorFamily = AlligatorFamilyF Color
 \end{code}
 %endif
 
-\begin{figure}
+\begin{figure*}
+
+\centering
+\begin{minipage}{\textwidth}
+\centering
 
 % % More detailed explaination of the commutation diagram (types and functions) later??
 % v2
@@ -370,9 +376,11 @@ type AlligatorFamily = AlligatorFamilyF Color
 \end{tikzcd}
 \]
 
+\end{minipage}
+
     \caption{Second attempt at instantiating the commutative diagram in Figure~\ref{fig:commutativeDiagram} for the notional machine \nmName{Alligator}.}
     \label{fig:commutativeDiagramAlligator-v2}
-\end{figure}
+\end{figure*}
 
 \paragraph{Evaluation Strategy}
 % now we have the setup to run the tests
@@ -465,6 +473,69 @@ recolor = undefined
 \end{code}
 %endif
 
+\begin{figure*}[h]
+\begin{diagram}[width=0.60\textwidth]
+import NotionalMachines.Lang.UntypedLambda.Main
+import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs
+import NotionalMachines.Machine.AlligatorEggs.Main
+import NotionalMachines.Machine.AlligatorEggs.Diagram
+import NotionalMachines.Util.Diagrams
+import NotionalMachines.Meta.Steppable
+
+wrongAlligatorDiagram :: IO (Diagram B)
+wrongAlligatorDiagram = do
+        font <- fontMono
+        let e2 = step e1
+        a1 <- (alligator . langToNm) e1
+        a3 <- (alligator . wrongEvolve . langToNm) e1
+        a2 <- (alligator . langToNm) e2
+        return (vertices [t font (unparse e2) # named "B_PL",
+                          a2 # named "B_NM1",
+                          a3 # named "B_NM2",
+                          a1 # named "A_NM",
+                          t font (unparse e1) # named "A_PL"]
+               # c "A_PL" "A_NM" 0.05 (label alpha)
+               # c "A_NM" "B_NM2" 0.06 (label fnm)
+               # c "A_PL" "B_PL" 0.06 (label fpl)
+               # c "B_PL" "B_NM1" 0.05 (label alpha))
+
+  where c = connectOutside'' (def { _headGap = small,
+                                    _tailGap = small,
+                                    _shaftStyle = mempty # lw thin,
+                                    _headLength = local 0.03})
+
+        label s = text s # fontSize (local 0.05)
+               <> rect 0.3 0.12 # lw none
+
+        t font s = d <> rect (width d) (height d) # lw none
+            where d = text'' font black 0.1 s # centerXY
+        alligator fs = (fmap ( centerXY
+                             . sized (mkWidth (0.3 * fromIntegral (length fs))))
+                     . toDiagram) fs
+
+        vertices = atPoints [p2 (w,0), p2 (w,m*h), p2 (m*w,h), p2 (0,h), p2 (0,0)]
+            where w = 1.5
+                  h = 0.7
+                  m = 0.7
+
+        --e1 = App (Lambda "t" (Lambda "t" (Var "t"))) (Lambda "a" (Var "a"))
+        e1 = App (Lambda "a" (Lambda "a" (Var "a"))) (Var "t")
+
+        alpha = "$\\alpha$"
+        math a s = "\\ensuremath{\\Conid{" ++ a ++ "}_{\\Conid{" ++ s ++ "}}}"
+        anm = math "A" "NM"
+        bnm = math "B" "NM"
+        fnm = math "f" "NM"
+        apl = math "A" "PL"
+        bpl = math "B" "PL"
+        fpl = math "f" "PL"
+
+dia = wrongAlligatorDiagram
+\end{diagram}
+    \caption{Unsoundness: \emph{bound} occurrences of a variable should not be substituted.}
+    \label{fig:alligator-issue}
+\end{figure*}
+
 With all the rules implemented, we can define
 a function |evolve|
 that applies them in sequence.
@@ -527,69 +598,6 @@ we cannot substitute \emph{bound} occurrences of a variable, only the ones that 
 %only free variables can be substituted.
 %
 
-
-\begin{figure}
-\begin{diagram}[width=0.60\textwidth]
-import NotionalMachines.Lang.UntypedLambda.Main
-import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs
-import NotionalMachines.Machine.AlligatorEggs.Main
-import NotionalMachines.Machine.AlligatorEggs.Diagram
-import NotionalMachines.Util.Diagrams
-import NotionalMachines.Meta.Steppable
-
-wrongAlligatorDiagram :: IO (Diagram B)
-wrongAlligatorDiagram = do
-        font <- fontMono
-        let e2 = step e1
-        a1 <- (alligator . langToNm) e1
-        a3 <- (alligator . wrongEvolve . langToNm) e1
-        a2 <- (alligator . langToNm) e2
-        return (vertices [t font (unparse e2) # named "B_PL",
-                          a2 # named "B_NM1",
-                          a3 # named "B_NM2",
-                          a1 # named "A_NM",
-                          t font (unparse e1) # named "A_PL"]
-               # c "A_PL" "A_NM" 0.05 (label alpha)
-               # c "A_NM" "B_NM2" 0.06 (label fnm)
-               # c "A_PL" "B_PL" 0.06 (label fpl)
-               # c "B_PL" "B_NM1" 0.05 (label alpha))
-
-  where c = connectOutside'' (def { _headGap = small,
-                                    _tailGap = small,
-                                    _shaftStyle = mempty # lw thin,
-                                    _headLength = local 0.03})
-
-        label s = text s # fontSize (local 0.05)
-               <> rect 0.3 0.12 # lw none
-
-        t font s = d <> rect (width d) (height d) # lw none
-            where d = text'' font black 0.1 s # centerXY
-        alligator fs = (fmap ( centerXY
-                             . sized (mkWidth (0.3 * fromIntegral (length fs))))
-                     . toDiagram) fs
-
-        vertices = atPoints [p2 (w,0), p2 (w,m*h), p2 (m*w,h), p2 (0,h), p2 (0,0)]
-            where w = 1.5
-                  h = 0.7
-                  m = 0.7
-
-        --e1 = App (Lambda "t" (Lambda "t" (Var "t"))) (Lambda "a" (Var "a"))
-        e1 = App (Lambda "a" (Lambda "a" (Var "a"))) (Var "t")
-
-        alpha = "$\\alpha$"
-        math a s = "\\ensuremath{\\Conid{" ++ a ++ "}_{\\Conid{" ++ s ++ "}}}"
-        anm = math "A" "NM"
-        bnm = math "B" "NM"
-        fnm = math "f" "NM"
-        apl = math "A" "PL"
-        bpl = math "B" "PL"
-        fpl = math "f" "PL"
-
-dia = wrongAlligatorDiagram
-\end{diagram}
-    \caption{Unsoundness: \emph{bound} occurrences of a variable should not be substituted.}
-    \label{fig:alligator-issue}
-\end{figure}
 
 
 % solution

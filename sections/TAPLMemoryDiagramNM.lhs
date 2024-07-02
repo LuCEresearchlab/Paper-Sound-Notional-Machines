@@ -101,6 +101,14 @@ shows the resulting diagram:
 \end{center}
 
 
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=.7\textwidth]{images/tapl-references/TAPL-ReferenceDiagram-Exercise-1311.pdf}
+    \caption{\nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef} for TAPL Exercise 13.1.1}
+    \label{fig:lamdaref-exercise}
+\end{figure*}
+
+
 The book then explains that
 one can verify that both names refer to the same cell by \emph{assigning} a new value to \texttt{s} and reading this value using \texttt{r}
 (for example, the term $\texttt{\seq{\assign{s}{82}}{\deref{r}}}$ would evaluate to \texttt{82}).
@@ -150,9 +158,8 @@ where we:
 
 \noindent
 Using only the constructs in the language, we express this with the following term:
-
 $$\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$$
- 
+
 %problem 2: direct substitution
 \subsubsection{Problem: Direct Substitution}
 The problem now is that if we model |A_PL| and evaluation as described in the book,
@@ -170,16 +177,7 @@ explicit information mapping names to values
 makes it less suitable
 to talk about aliasing,
 because even though a term
-%
-%\begin{wrapfigure}{r}{.6\textwidth}
-\begin{figure}
-    \centering
-    \includegraphics[width=.6\textwidth]{images/tapl-references/LambdaRefTrace.pdf}
-    \caption{Tracing the evaluation of $\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$ using \nmName{TAPLMemoryDiagram}.}
-    \label{fig:lamdaref-trace}
-\end{figure}
-%\end{wrapfigure}
-%
+
 may contain, at any given point during evaluation,
 multiple occurrences of the same location,
 it is not possible to know if these locations correspond to different names,
@@ -191,15 +189,16 @@ only substituting the corresponding value when we evaluate a variable.
 Like the definition of application in terms of substitution,
 we have to be careful to avoid variable capture by generating fresh names when needed.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.7\textwidth]{images/tapl-references/TAPL-ReferenceDiagram-Exercise-1311.pdf}
-    \caption{\nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef} for TAPL Exercise 13.1.1}
-    \label{fig:lamdaref-exercise}
-\end{figure}
-
-
 \subsubsection{Illustrative Example}
+
+%\begin{wrapfigure}{r}{.6\textwidth}
+\begin{figure*}
+    \centering
+    \includegraphics[width=.6\textwidth]{images/tapl-references/LambdaRefTrace.pdf}
+    \caption{Tracing the evaluation of $\texttt{\app{(\tyabs{r}{\Ref{Nat}}{\app{(\tyabs{s}{\Ref{Nat}}{\seq{\assign{s}{82}}{\deref{r}}})}{r}})}{(\refr{13})}}$ using \nmName{TAPLMemoryDiagram}.}
+    \label{fig:lamdaref-trace}
+\end{figure*}
+%\end{wrapfigure}
 
 Figure~\ref{fig:lamdaref-trace} shows two variations of the \nm{} being used to explain the evaluation of the term we had described before.
 It shows the state after each reduction step,
@@ -241,6 +240,62 @@ data DTerm l  =  Leaf String
 \end{code}
 \end{minipage}
 
+\begin{figure*}[h]
+
+\centering
+\begin{minipage}{\textwidth}
+\centering
+
+\[
+\begin{tikzcd}
+|TAPLMemoryDiagram| \arrow[rrrr, "|fmap alpha|\; \circ\; |step|\; \circ_M\; |alpha_circ|", dashed]
+                    \arrow[ddd,  "|alpha_circ|", shift left, dotted]
+& & & &
+|Maybe TAPLMemoryDiagram| \\
+\\
+\\
+|(TermUL, EnvUL, StoreUL)| \arrow[rrrr, "|step|"]
+                           \arrow[uuu,  "|alpha|", shift left]
+& & & &
+|Maybe (TermUL, EnvUL, StoreUL)| \arrow[uuu, "|fmap alpha|", dashed]
+\end{tikzcd}
+\]
+
+\end{minipage}
+
+    \caption{Instantiation of the commutative diagram in Figure~\ref{fig:commutativeDiagram} for the notional machine \nmName{TAPLMemoryDiagram} and the programming language \plName{TypedLambdaRef}.}
+    \label{fig:commutativeDiagramTAPLMemoryDiagram}
+\end{figure*}
+
+%%%%%%%%%%
+
+\begin{figure*}[h]
+
+\centering
+\begin{minipage}{\textwidth}
+\centering
+
+\[
+\begin{tikzcd}
+|TyExpTutorDiagram| \arrow[rrrrr, "|fmap alpha_TyTerm|\; \circ\; |typeof1|\; \circ_M\; |alpha_TyTerm_circ|", dashed]
+                  \arrow[ddd,   "|alpha_TyTerm_circ|"                                                     , shift left, dotted]
+& & & & &
+|Maybe TyExpTutorDiagram| \\
+\\
+\\
+|TyTerm_TyArith| \arrow[rrrrr, "|typeof1|"]
+                 \arrow[uuu,   "|alpha_TyTerm|", shift left]
+& & & & &
+|Maybe TyTerm_TyArith| \arrow[uuu, "|fmap alpha_TyTerm|", dashed]
+\end{tikzcd}
+\]
+
+\end{minipage}
+
+    \caption{Instantiation of the commutative diagram in Figure~\ref{fig:commutativeDiagram} for a notional machine focused on type-checking programs in \plName{TypedArith}. The notional machine exposes the inner workings of the typing algorithm.}
+    \label{fig:commutativeDiagramTypedArith-v2}
+\end{figure*}
+
 The type |DLocation| corresponds to arrow destinations (arrow endpoints).
 A term is represented as a rose tree of |String|s augmented with a case for location.
 
@@ -264,27 +319,6 @@ we use the symbol $\circ_M$ to denote monadic function composition (the fish ope
 %                 , fNM    = fmap toNM . step <=< fromNM
 %                 , alphaA = toNM
 %                 , alphaB = fmap toNM }
-
-\begin{figure}
-
-\[
-\begin{tikzcd}
-|TAPLMemoryDiagram| \arrow[rrrr, "|fmap alpha|\; \circ\; |step|\; \circ_M\; |alpha_circ|", dashed]
-                    \arrow[ddd,  "|alpha_circ|", shift left, dotted]
-& & & &
-|Maybe TAPLMemoryDiagram| \\
-\\
-\\
-|(TermUL, EnvUL, StoreUL)| \arrow[rrrr, "|step|"]
-                           \arrow[uuu,  "|alpha|", shift left]
-& & & &
-|Maybe (TermUL, EnvUL, StoreUL)| \arrow[uuu, "|fmap alpha|", dashed]
-\end{tikzcd}
-\]
-
-    \caption{Instantiation of the commutative diagram in Figure~\ref{fig:commutativeDiagram} for the notional machine \nmName{TAPLMemoryDiagram} and the programming language \plName{TypedLambdaRef}.}
-    \label{fig:commutativeDiagramTAPLMemoryDiagram}
-\end{figure}
 
 % The process of reworking |A_PL| and |f_PL| to expose an explicit name environment
 % shows that

@@ -189,8 +189,8 @@ Our denotation of pallet is different: it is the representation of an empty list
 %
 The result is that we can construct lists either with a pallet
 or by stacking a box on top of a stack,
-which must have eventually a pallet at the end.
-To deconstruct it, we can pick up
+which must have a pallet at the end.
+To deconstruct it, we pick up
 a box from the top of the stack
 (\mbox{|pickUp :: Stack -> Maybe (Box, Stack)|}).
 When trying to pick up a box,

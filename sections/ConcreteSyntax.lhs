@@ -14,32 +14,6 @@ module ConcreteSyntax where
 \section{Abstract vs. Concrete Syntax of Notional Machines}
 \label{sec:ConcreteSyntax}
 
-%\begin{wrapfigure}{r}{.2\textwidth}
-\begin{figure}
-    \centering
-    \begin{minipage}{0.2\textwidth}
-    \centering
-    \begin{diagram}[width=\textwidth]
-import NotionalMachines.Util.Diagrams
-import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs
-
-dia = (diagramWithError . diagram)
-      "(\\f. \\x. f (f x))"
-    \end{diagram}
-    % small vertical fill
-    \begin{minipage}{0.7\textwidth}
-    \vspace{0.25cm}
-    % textwidth is defined by the minipage
-    \centering
-    \includegraphics[width=0.6\textwidth]{images/alligators/alligators-numeral-2-website.png}
-    \end{minipage}
-    \end{minipage}
-    \caption{Multiple concrete representations.}
-    %\caption{Different concrete representations of the same Alligator family in the \nmName{Alligator} \nm{}.}
-    \label{fig:two-alligator-representations}
-\end{figure}
-%\end{wrapfigure}
-
 % - general idea
 %The \nmName{Alligator} \nm{} we have seen uses concrete images to represent alligators and eggs.
 %
@@ -83,6 +57,13 @@ by calls to our artifact
 that are
 embedded directly into the paper.
 
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{images/alligators/NM-concrete-abstract-abstract-concrete.pdf}
+    \caption{Both program and \nm{} have abstract and concrete representations.}
+    \label{fig:concrete-abstract}
+\end{figure*}
+
 
 By decoupling the abstract from the concrete representation, a notional machine can have multiple concrete representations.
 Alligator Eggs, for example, also describes another concrete syntax that it calls ``Schematic Form''.
@@ -99,6 +80,32 @@ An alligator is drawn as a line ending with a \texttt{<} for a mouth,
 and is preceded by a variable name corresponding to its color.
 An old alligator is drawn with a line without a mouth.
 An egg is drawn just with the variable name corresponding to its color.
+
+%\begin{wrapfigure}{r}{.2\textwidth}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.2\textwidth}
+    \centering
+    \begin{diagram}[width=\textwidth]
+import NotionalMachines.Util.Diagrams
+import NotionalMachines.LangInMachine.UntypedLambdaAlligatorEggs
+
+dia = (diagramWithError . diagram)
+      "(\\f. \\x. f (f x))"
+    \end{diagram}
+    % small vertical fill
+    \begin{minipage}{0.7\textwidth}
+    \vspace{0.25cm}
+    % textwidth is defined by the minipage
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/alligators/alligators-numeral-2-website.png}
+    \end{minipage}
+    \end{minipage}
+    \caption{Multiple concrete representations.}
+    %\caption{Different concrete representations of the same Alligator family in the \nmName{Alligator} \nm{}.}
+    \label{fig:two-alligator-representations}
+\end{figure}
+%\end{wrapfigure}
 
 %\subsection{Designing a Concrete Representation}
 %

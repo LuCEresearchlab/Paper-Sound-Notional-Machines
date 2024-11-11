@@ -201,7 +201,7 @@ This square commutes like so:
 
 \def\commentbegin{\quad\{\ }
 \def\commentend{\}}
-\begin{minipage}[b]{125pt}\setlength\mathindent{-2ex}
+\begin{minipage}[b]{0.48\textwidth}
 \begin{spec}
     f_NM . alpha_A
 ==  {- definition of |f_NM| -}
@@ -214,8 +214,8 @@ This square commutes like so:
 \end{minipage}
 \begin{minipage}[b]{0ex}{\rule[0ex]{0.5pt}{1.3in}}
 \end{minipage}
-\hspace{0ex}
-\begin{minipage}[b]{0.3\textwidth}\setlength\mathindent{0ex}
+\hspace{1ex}
+\begin{minipage}[b]{0.3\textwidth}\setlength\mathindent{2ex}
 \begin{spec}
     alpha_B . f_PL
 ==  {- definition of |alpha_B| -}

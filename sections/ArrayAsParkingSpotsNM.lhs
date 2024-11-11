@@ -57,13 +57,6 @@ An array supports three operations:
 % -- problem: empty spaces, primitive types versus reference types
 \subsubsection{Problem: reference types versus primitive types}
 
-\begin{figure*}[h]
-    \centering
-    \includegraphics[width=\textwidth]{images/alligators/NM-concrete-abstract-abstract-concrete.pdf}
-    \caption{Both program and \nm{} have abstract and concrete representations.}
-    \label{fig:concrete-abstract}
-\end{figure*}
-
 
 One of the appeals of the notional machine is that
 we would represent

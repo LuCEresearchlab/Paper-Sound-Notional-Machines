@@ -101,14 +101,6 @@ shows the resulting diagram:
 \end{center}
 
 
-\begin{figure*}[h]
-    \centering
-    \includegraphics[width=.7\textwidth]{images/tapl-references/TAPL-ReferenceDiagram-Exercise-1311.pdf}
-    \caption{\nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef} for TAPL Exercise 13.1.1}
-    \label{fig:lamdaref-exercise}
-\end{figure*}
-
-
 The book then explains that
 one can verify that both names refer to the same cell by \emph{assigning} a new value to \texttt{s} and reading this value using \texttt{r}
 (for example, the term $\texttt{\seq{\assign{s}{82}}{\deref{r}}}$ would evaluate to \texttt{82}).
@@ -177,11 +169,18 @@ explicit information mapping names to values
 makes it less suitable
 to talk about aliasing,
 because even though a term
-
 may contain, at any given point during evaluation,
 multiple occurrences of the same location,
 it is not possible to know if these locations correspond to different names,
 and one may need to trace several reduction steps back to find out when a name was substituted by a location.
+
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=.7\textwidth]{images/tapl-references/TAPL-ReferenceDiagram-Exercise-1311.pdf}
+    \caption{\nmName{TAPLMemoryDiagram} for \plName{TypedLambdaRef} for TAPL Exercise 13.1.1}
+    \label{fig:lamdaref-exercise}
+\end{figure*}
 
 We need to change |A_PL| and \texttt{step} to capture this information,
 keeping not only a store but an explicit name environment that maps names to values, and

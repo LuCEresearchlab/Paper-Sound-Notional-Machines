@@ -168,22 +168,6 @@ but the \nm{} does not expose to the student the inner workings of the process o
     \label{fig:TypedArithExample}
 \end{figure*}
 
-
-\begin{table*}[h]
-    \centering
-    \begin{tabular}{||r||||l||l||l||}
-        \hline
-        \textbf{Section}            & \textbf{Notional Machine}           & \textbf{Programming Language}    & \textbf{Focus}      \\ \hline\hline
-        \ref{sec:AlligatorEggs} & \nmName{Alligator} & \plName{UntypedLambda} & Evaluation \\ \hline
-        \ref{sec:ListAsStack}  & \nmName{ListAsStack}           & -  & Data Structure (List) \\ \hline
-        \ref{sec:ArrayAsParkingSpots} & \nmName{ArrayAsParkingSpots}   & \plName{Java}  & Evaluation (Arrays) \\ \hline
-        % \ref{sec:Reduct} & \nmName{Reduct} & \plName{UntypedLambda} & step\\\hline
-    \end{tabular}
-    \caption{Notional machines, programming languages, and aspects of focus
-    used in Section~\ref{chr:RevealingInconsistencies}.}
-    \label{tab:examples-fixing-nms}
-\end{table*}
-
 The second design,
 represented in the diagram in Figure~\ref{fig:commutativeDiagramTypedArith-v2},
 tackles this issue by enriching the \nm{} in a way that allows it to go step-by-step through the typing algorithm.
